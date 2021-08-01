@@ -1,0 +1,26 @@
+{
+    "name": "CovidSafeTravels",
+    "description": "Priceline-CovidSafeTravels",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "run_at": "document_idle",
+            "matches": [
+                "https://www.priceline.com/m/fly/search*"
+            ],
+            "css": [
+                "build/static/css/app.css"
+            ],
+            "js": [
+                "build/static/js/0.chunk.js",
+                "build/static/js/content.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "declarativeContent",
+        "tabs",
+        "activeTab"
+    ]
+}
