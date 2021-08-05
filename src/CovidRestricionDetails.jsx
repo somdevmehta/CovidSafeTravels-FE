@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Collapse, PageHeader, Tabs, Divider } from "antd";
 import Datamap from "react-datamaps";
 import { CaretRightOutlined } from "@ant-design/icons";
+import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 const text = `
@@ -12,6 +13,7 @@ const text = `
 
 export default class CovidRestricionDetails extends React.Component {
 	state = {
+		diseaseTesting: null,
 		mapColorData: {
 			IND: { fillKey: "OPEN" },
 			CAN: { fillKey: "CLOSED" },
@@ -24,20 +26,158 @@ export default class CovidRestricionDetails extends React.Component {
 		},
 	};
 
-	renderText = () => {
-		return (
-			<p>{text}</p>
-		)
+	componentDidMount() {
+		console.log("Modal", this.props.covidRestrictionData);
 	}
+
+	renderText = () => {
+		return <p>{text}</p>;
+	};
+
+	renderEntryRestrictions = () => {
+		const { entry } =
+			this.props.covidRestrictionData.data.areaAccessRestriction;
+		return (
+			<React.Fragment>
+				<p>Entry Ban: {entry.ban}</p>
+				<p>Through Date? {entry.throughDate}</p>
+				<br />
+				<br />
+				<p>More Info:</p>
+				<p dangerouslySetInnerHTML={{ __html: entry.text }}></p>
+				<br />
+				<br />
+				{entry.rules ? (
+					<p>
+						Rules: <a href={entry.rules}>{entry.rules}</a>
+					</p>
+				) : null}
+				{entry.exemptions ? (
+					<p>
+						Exemptions: <a href={entry.exemptions}>{entry.exemptions}</a>
+					</p>
+				) : null}
+			</React.Fragment>
+		);
+	};
+
+	renderDiseasesTesting = () => {
+		const { diseaseTesting } =
+			this.props.covidRestrictionData.data.areaAccessRestriction;
+		return (
+			<React.Fragment>
+				<p>Disease Testing: {diseaseTesting.isRequired}</p>
+				<p>When? {diseaseTesting.when}</p>
+				<p>Requirement: {diseaseTesting.requirement}</p>
+				<p>Test Type: {diseaseTesting.testType}</p>
+				<br />
+				<br />
+				<p>More Info:</p>
+				<p dangerouslySetInnerHTML={{ __html: diseaseTesting.text }}></p>
+				<br />
+				<br />
+				{diseaseTesting.rules ? (
+					<p>
+						Rules: <a href={diseaseTesting.rules}>{diseaseTesting.rules}</a>
+					</p>
+				) : null}
+			</React.Fragment>
+		);
+	};
+
+	renderDeclarationDocumentation = () => {
+		const { declarationDocuments } =
+			this.props.covidRestrictionData.data.areaAccessRestriction;
+		return (
+			<React.Fragment>
+				<p>Document Required?: {declarationDocuments.documentRequired}</p>
+				<br />
+				<br />
+				<p>More Info:</p>
+				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
+				<br />
+				<br />
+				{declarationDocuments.healthDocumentationLink ? (
+					<p>
+						Health Documentation Link:{" "}
+						<a href={declarationDocuments.healthDocumentationLink}>
+							{declarationDocuments.healthDocumentationLink}
+						</a>
+					</p>
+				) : null}
+				{declarationDocuments.travelDocumentationLink ? (
+					<p>
+						Travel Documentation Link:{" "}
+						<a href={declarationDocuments.travelDocumentationLink}>
+							{declarationDocuments.travelDocumentationLink}
+						</a>
+					</p>
+				) : null}
+			</React.Fragment>
+		);
+	};
+
+	renderDiseaseTracing = () => {
+		const { tracingApplication } =
+			this.props.covidRestrictionData.data.areaAccessRestriction;
+		return (
+			<React.Fragment>
+				<p>Required?: {tracingApplication.isRequired}</p>
+				<br />
+				<br />
+				<p dangerouslySetInnerHTML={{ __html: tracingApplication.text }}></p>
+				<br />
+				<br />
+				{tracingApplication.iosUrl ? (
+					<p>
+						iOS:{" "}
+						<a href={tracingApplication.iosUrl}>
+							{tracingApplication.iosUrl}
+						</a>
+					</p>
+				) : null}
+				{tracingApplication.androidUrl ? (
+					<p>
+						Android:{" "}
+						<a href={tracingApplication.androidUrl}>
+							{tracingApplication.androidUrl}
+						</a>
+					</p>
+				) : null}
+			</React.Fragment>
+		);
+	};
+
+	renderMasksQuarantine = () => {
+		const { mask } =
+			this.props.covidRestrictionData.data.areaAccessRestriction;
+		return (
+			<React.Fragment>
+				<p>Required?: {mask.isRequired}</p>
+				<br />
+				<br />
+				<p dangerouslySetInnerHTML={{ __html: mask.text }}></p>
+				<br />
+				<br />
+			</React.Fragment>
+		);
+	};
 
 	changeTabPosition = (e) => {
 		this.setState({ tabPosition: e.target.value });
 	};
 
-	renderMap = (mapColorData) => {
+	renderMap = () => {
+		const { bannedArea } =
+			this.props.covidRestrictionData.data.areaAccessRestriction.entry;
+		let mapColorData = {};
+		bannedArea.forEach((area) => {
+			mapColorData[countryMap()[area.iataCode]] = { fillKey: "CLOSED" };
+		});
+		console.log(mapColorData);
 		return (
 			<Datamap
-				style={{ height: 600, width: "90%" }}
+				style={{ height: 500, width: "80%" }}
 				projection="mercator"
 				geographyConfig={{
 					popupOnHover: true,
@@ -90,7 +230,7 @@ export default class CovidRestricionDetails extends React.Component {
 						<p>{text}</p>
 					</Panel>
 					<Panel
-						header="List of Banned Countries"
+						header="Banned Countries"
 						key="4"
 						className="site-collapse-custom-panel"
 					>
@@ -140,26 +280,31 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	tabs = [
-		{ name: "Entry Restrictions", renderFn: this.renderText },
-		{ name: "Diseases Testing Rules", renderFn: this.renderText },
-		{ name: "Declaration Documentation", renderFn: this.renderText },
-		{ name: "List of Banned Countries", renderFn: () => this.renderMap(this.state.mapColorData) },
-		{ name: "Disease Tracing Applications", renderFn: this.renderText },
-		{ name: "Masks & Quarantine Rules", renderFn: this.renderText },
-		{ name: "Entry Restrictions", renderFn: this.renderText }
-	]
+		{ name: "Entry Restrictions", renderFn: this.renderEntryRestrictions },
+		{ name: "Diseases Testing Rules", renderFn: this.renderDiseasesTesting },
+		{
+			name: "Declaration Documentation",
+			renderFn: this.renderDeclarationDocumentation,
+		},
+		{
+			name: "List of Banned Countries",
+			renderFn: () => this.renderMap(this.state.mapColorData),
+		},
+		{ name: "Disease Tracing Applications", renderFn: this.renderDiseaseTracing },
+		{ name: "Masks & Quarantine Rules", renderFn: this.renderMasksQuarantine },
+		{ name: "Ongoing Area Restrictions", renderFn: this.renderText },
+	];
 
 	render() {
 		return (
 			<Tabs tabPosition={"left"}>
-				{ this.tabs.map(tab => (
+				{this.tabs.map((tab) => (
 					<TabPane tab={tab.name} key={tab.name} style={{ height: "600px" }}>
 						<span style={{ color: "var(--primary-color)" }}>{tab.name}</span>
 						<Divider style={{ marginTop: 0 }} />
 						{tab.renderFn()}
 					</TabPane>
-				))
-				}
+				))}
 			</Tabs>
 			// <div className="site-card-wrapper">
 			// 	<Row gutter={16}>
