@@ -29,7 +29,12 @@ class Banner extends React.Component {
 
     renderModal = (destination) => {
         return (
-            <Modal title={`Travel Advisory for ${destination}`} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
+            <Modal title={`Travel Advisory for ${destination}`} visible={this.state.isModalVisible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                width={"80%"}
+                footer={null}
+            >
                 <CovidRestricionDetails />
             </Modal>
         )
