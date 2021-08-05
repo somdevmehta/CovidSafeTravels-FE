@@ -4,7 +4,7 @@ import { Modal } from 'antd';
 
 class Banner extends React.Component {
     state = {
-        isModalVisible: true,
+        isModalVisible: false,
     };
 
     bannerItems = [
@@ -61,7 +61,7 @@ class Banner extends React.Component {
                         <path d="M11 17h2v-6h-2v6zm1-15C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zM11 9h2V7h-2v2z"></path>
                     </svg>
 					&nbsp;&nbsp;
-					<span style={{ fontSize: 18, color: "primary" }}>
+					<span style={{ fontSize: "0.8em", color: "primary" }}>
                         Flying to {destination}? Checkout the latest Covid restrictions here
 					</span>
                 </div>

@@ -61,3 +61,7 @@ button#cst-modal-close:hover {
   color: rgb(255, 255, 255);
   border-radius: 0px;
 }
+
+.ant-modal-close-icon {
+  margin-top : 20px;
+}
