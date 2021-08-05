@@ -2,6 +2,7 @@
 import React from 'react';
 import BannerItem from "./BannerItem";
 import { Modal } from 'antd';
+import CovidRestricionDetails from '../CovidRestricionDetails';
 
 class Banner extends React.Component {
     state = {
@@ -29,9 +30,7 @@ class Banner extends React.Component {
     renderModal = (destination) => {
         return (
             <Modal title={`Travel Advisory for ${destination}`} visible={this.state.isModalVisible} onOk={this.handleOk} onCancel={this.handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <CovidRestricionDetails />
             </Modal>
         )
     };
