@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+/* global chrome */
+import React from 'react';
 import BannerItem from "./BannerItem";
 import { Modal } from 'antd';
 
 class Banner extends React.Component {
     state = {
-        isModalVisible: true,
+        isModalVisible: false,
     };
 
     bannerItems = [
-        { text: "Entry Guidelines" },
-        { text: "Testing Requirements" },
-        { text: "Additional Travel Info", showDivider: false }
+        { text: "Entry Guidelines", icon: chrome.runtime.getURL("build/images/safety.png") },
+        { text: "Testing Requirements", icon: chrome.runtime.getURL("build/images/test-results.png") },
+        { text: "Additional Travel Info", icon: chrome.runtime.getURL("build/images/passport.png") }
     ]
-
 
     handleModalToggle = (isOpen) => {
         this.setState({ isModalVisible: isOpen });
@@ -39,13 +39,16 @@ class Banner extends React.Component {
     render() {
         const { source, destination } = this.props;
         return (
-            <React.Fragment>
+            <div className="banner-background">
                 {this.renderModal(destination)}
                 <div
-                    className="banner eEqiTz"
-                    style={{ height: "40px" }}
+                    className="banner-heading"
                     onClick={() => this.handleModalToggle(true)}
                 >
+                    <span>
+                        <span>COVID-SafeTravels : </span> Here are some guidelines to help you plan your travel with safety to {destination}.
+					</span>
+                    &nbsp;&nbsp;
                     <svg
                         viewBox="0 0 24 24"
                         height="20"
@@ -56,21 +59,17 @@ class Banner extends React.Component {
                         tabIndex="-1"
                         focusable="false"
                         role="img"
-                        className="Svg-sc-12lgb6u-0 fjnRPS InformationOutline__SvgInformationOutline-sc-1spn3av-0 eXhEL"
+                        className="Svg-sc-12lgb6u-0 fjnRPS InformationOutline__SvgInformationOutline-sc-1spn3av-0 eXhEL info-button"
                     >
                         <path d="M11 17h2v-6h-2v6zm1-15C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zM11 9h2V7h-2v2z"></path>
                     </svg>
-					&nbsp;&nbsp;
-					<span style={{ fontSize: 18, color: "primary" }}>
-                        Flying to {destination}? Checkout the latest Covid restrictions here
-					</span>
                 </div>
-                <div className="banner eEqiTz">
+                <div className="banner">
                     {this.bannerItems.map(item => (
                         <BannerItem {...item} handleModalToggle={this.handleModalToggle} />
                     ))}
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

@@ -1,9 +1,15 @@
+:root {
+  --primary-color: rgb(0, 104, 239);
+}
+
 .banner {
-  height: 150px;
-  margin-bottom: 11px; 
-  display:flex;
-  justify-content:center; 
-  align-items:center;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  float: left;
+  min-width: 100%;
+  border-radius: 4px;
+  margin-top: 10px;
 }
 
 .cst-modal {
@@ -60,4 +66,67 @@ button#cst-modal-close:hover {
   border-color: rgb(0, 68, 153);
   color: rgb(255, 255, 255);
   border-radius: 0px;
+}
+
+.ant-modal-close-icon {
+  margin-top : 20px;
+}
+
+.banner-heading {
+  font-size: 0.9em;
+  font-weight: 700;
+  font-family: inherit;
+  height: 40px;
+}
+
+.banner-heading>span>span {
+  color: var(--primary-color)
+}
+
+.banner-item {
+  font-size: 0.8em;
+  font-family: inherit;
+  margin: auto;
+  flex: 0.75;
+}
+
+.banner-background {
+  margin-bottom: 8px;
+  display: flex;
+  flex-flow: column;
+  background: rgb(244, 246, 248);
+  border: 1px solid rgb(244, 246, 248);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.info-button {
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.card {
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  min-width: 104px;
+  height: 100%;
+  padding: 4px;
+  border-radius: 6px;
+  background-color: rgb(255, 255, 255);
+  text-decoration: none;
+  position: relative;
+  border: 1px solid rgb(192, 202, 213);
+  display: flex;
+  margin-right: 8px;
+  min-height: 80px;
+  width: 33%;
+}
+
+.card-icon {
+  flex: 0.25;
+  height: 100%;
+  min-width: 56px;
+  margin: auto;
 }

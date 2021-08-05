@@ -2,7 +2,7 @@
     "name": "CovidSafeTravels",
     "description": "Priceline-CovidSafeTravels",
     "version": "1.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "content_scripts": [
         {
             "run_at": "document_idle",
@@ -16,6 +16,16 @@
             "js": [
                 "build/static/js/0.chunk.js",
                 "build/static/js/content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "build/images/*.png"
+            ],
+            "matches": [
+                "<all_urls>"
             ]
         }
     ],
