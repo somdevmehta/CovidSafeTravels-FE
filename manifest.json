@@ -10,7 +10,8 @@
                 "https://www.priceline.com/m/fly/search*"
             ],
             "css": [
-                "build/static/css/app.css"
+                "build/static/css/app.css",
+                "public/antd.css"
             ],
             "js": [
                 "build/static/js/0.chunk.js",
