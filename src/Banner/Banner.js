@@ -41,15 +41,13 @@ class Banner extends React.Component {
         return (
             <div className="banner-background">
                 {this.renderModal(destination)}
-                <div
-                    className="banner-heading"
-                    onClick={() => this.handleModalToggle(true)}
-                >
+                <div className="banner-heading">
                     <span>
                         <span>COVID-SafeTravels : </span> Here are some guidelines to help you plan your travel with safety to {destination}.
 					</span>
                     &nbsp;&nbsp;
                     <svg
+                        onClick={() => this.handleModalToggle(true)}
                         viewBox="0 0 24 24"
                         height="20"
                         width="20"

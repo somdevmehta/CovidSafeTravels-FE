@@ -5,11 +5,11 @@
 .banner {
   display: flex;
   -webkit-box-pack: center;
-  justify-content: center;
-  float: left;
   min-width: 100%;
   border-radius: 4px;
   margin-top: 10px;
+  overflow-x: scroll;
+  overflow-wrap: break-word;
 }
 
 .cst-modal {
@@ -76,7 +76,7 @@ button#cst-modal-close:hover {
   font-size: 0.9em;
   font-weight: 700;
   font-family: inherit;
-  height: 40px;
+  min-height: 40px;
 }
 
 .banner-heading>span>span {
@@ -88,6 +88,7 @@ button#cst-modal-close:hover {
   font-family: inherit;
   margin: auto;
   flex: 0.75;
+  padding-left: 8px;
 }
 
 .banner-background {
@@ -110,7 +111,7 @@ button#cst-modal-close:hover {
   color: inherit;
   display: flex;
   flex-direction: row;
-  min-width: 104px;
+  min-width: 156px;
   height: 100%;
   padding: 4px;
   border-radius: 6px;
@@ -129,4 +130,17 @@ button#cst-modal-close:hover {
   height: 100%;
   min-width: 56px;
   margin: auto;
+}
+
+@media(max-width:550px) {
+  .banner-item {
+    font-size: 0.7em;
+  }
+  .card {
+    min-height: 50px;
+  }
+
+  .banner-heading {
+    font-size: 0.8em;
+  }
 }
