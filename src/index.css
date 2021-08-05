@@ -54,3 +54,10 @@ button#cst-modal-close {
   background-color: rgb(0, 104, 239);
   color: rgb(255, 255, 255);
 }
+
+button#cst-modal-close:hover {
+  background-color: rgb(0, 68, 153);
+  border-color: rgb(0, 68, 153);
+  color: rgb(255, 255, 255);
+  border-radius: 0px;
+}
