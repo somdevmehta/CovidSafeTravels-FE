@@ -15,6 +15,7 @@ class ModalJsx extends React.Component {
 						color="primary"
 						id="cst-modal-close"
 						class="Button-sc-27clrj-0 RadioButtonGroup__TabButton-sc-1qmfrht-1"
+                        onClick={this.props.onClose}
 					>
 						Close
 					</button>
