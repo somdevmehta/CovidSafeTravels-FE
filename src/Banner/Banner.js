@@ -3,27 +3,31 @@ import React from "react";
 import BannerItem from "./BannerItem";
 import { Modal } from "antd";
 import CovidRestricionDetails from "../CovidRestricionDetails";
+import {getAlpha2CountryCode} from "../airportCodeToCountryCodeMap"
 import axios from "axios";
 
 class Banner extends React.Component {
 	state = {
 		isModalVisible: false,
 		covidRestrictionData: null,
-        surveyData: null
+        surveyData: null,
+        country: null
 	};
 
 
 
 	componentDidMount() {
-		this.getCovidRestrictionData();
+        const destinationCountryCode = getAlpha2CountryCode(this.props.destination);
+		this.getCovidRestrictionData(destinationCountryCode);
 	}
 
-	getCovidRestrictionData = () => {
+	getCovidRestrictionData = (destinationCountryCode) => {
 		axios
-			.get("http://localhost:8080/covidDetails?country=IN")
+			.get(`http://localhost:8080/covidDetails?country=${destinationCountryCode}`)
 			.then((response) => {
+                const country = response.data.travelRestrictionsResponseContainer.data.area.name.toUpperCase()
 				this.setState({ covidRestrictionData: response.data.travelRestrictionsResponseContainer,
-                    surveyData: response.data.surveyDetailsContainer });
+                    surveyData: response.data.surveyDetailsContainer, country });
 				console.log(response.data);
 			})
 			.catch((err) => {
@@ -61,7 +65,7 @@ class Banner extends React.Component {
 
 	render() {
 		const { source, destination } = this.props;
-		const { covidRestrictionData, surveyData } = this.state;
+		const { covidRestrictionData, surveyData, country } = this.state;
 		if (covidRestrictionData === null) {
 			return null;
 		}
@@ -89,7 +93,7 @@ class Banner extends React.Component {
 				<div className="banner-heading">
 					<span>
 						<span>COVID-SafeTravels : </span> Here are some guidelines to help
-						you plan your travel with safety to {destination}.
+						you plan your travel with safety to {country}.
 					</span>
 					&nbsp;&nbsp;
 					<svg
