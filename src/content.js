@@ -14,6 +14,7 @@ let loadResults = () => {
 
 let pushCustomDiv = (src, dest) => {
     let middleDiv = document.getElementsByClassName("ListingsPagestyles__Middle-sc-14lhci9-5 chVbqz")[0];
+    console.log("Injecting to", middleDiv)
     let customDiv = document.createElement("div");
     let modalDiv = document.createElement("div");
     modalDiv.id = "modal";

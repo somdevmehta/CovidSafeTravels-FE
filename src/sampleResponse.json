@@ -1,0 +1,293 @@
+{
+    "meta": {
+        "links": {
+            "self": "https://test.api.amadeus.com/v1/diseases/covid19-area-report?countryCode=US"
+        }
+    },
+    "data": {
+        "area": {
+            "name": "United States of America",
+            "iataCode": "US",
+            "areaType": "Country"
+        },
+        "summary": "<p>Authorities have imposed international travel restrictions from late February 2020 – one month after the first cases were detected in the country – and nationwide social distancing guidelines from late March 2020. The country has the highest case and fatality figures in the world. From March 2020, stay-at-home lockdown began to be implemented as the virus spread across the country. All states began reopening as of June 2020 at widely varying paces, before reimposing restrictions from October 2020, and then moving once more to lift most remaining measures as of April 2021 while implementing vaccination campaigns. Approximately 60,000 cases per day were reported nationwide as of August 2021. Authorities warned of rising case numbers as the Delta virus variant spreads.</p>",
+        "diseaseRiskLevel": "Medium",
+        "diseaseInfection": {
+            "date": 1627171200000,
+            "level": "Extreme",
+            "rate": 177.88,
+            "infectionMapLink": "https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html"
+        },
+        "diseaseCases": {
+            "date": 1624320000000,
+            "deaths": 602459,
+            "confirmed": 33564802
+        },
+        "hotspots": "<p>Nevada, Utah, Wyoming, Colorado, Alaska, Texas, Oklahoma, Kansas, Mississippi, Alabama, Tennessee, Missouri, Arkansas, Louisiana, Florida, California</p>",
+        "dataSources": {
+            "covidDashboardLink": null,
+            "governmentSiteLink": "https://www.cdc.gov/coronavirus/2019-ncov/index.html"
+        },
+        "areaRestrictions": [
+            {
+                "date": 1627430400000,
+                "text": "<p>Some American Indian reservations have imposed dawn-to-dusk curfews in their territories and restricted non-essential movement until further notice.</p>",
+                "restrictionType": "Curfew"
+            },
+            {
+                "date": 1626825600000,
+                "text": "<p>The Centers for Disease Control (CDC) announced that domestric travellers who are fully vaccinated against COVID-19, defined as two weeks having passed since obtaining their final dose of the vaccine, do not need to get tested before or after travel and do not need to self-quarantine. Domestic travellers are recommended to take a viral test 1-3 days before departure and to self-quarantine for 7 days upon arrival. Travellers should get tested again 3-5 days after arrival; if a test is not available or results are delayed, travellers should self-quarantine for a total of 10 days.</p> <p>Masks must continue to be worn on interstate transport, flights and at airports.</p>",
+                "restrictionType": "Domestic Travel"
+            }
+        ],
+        "areaAccessRestriction": {
+            "transportation": {
+                "date": 1627430400000,
+                "text": "<p>American Airlines, United Airlines, Delta Air Lines and other major carriers have suspended some flights to China, Hong Kong, Macau, the United Kingdom (UK), Australia, Europe and Latin America. Officials partially lifted a ban on flights by Air China, China Eastern Airlines, China Southern Airlines, and Xiamen Airlines after Chinese authorities allowed United and Delta airlines to operate one round-trip between the two countries.</p>",
+                "isBanned": "Partial"
+            },
+            "declarationDocuments": {
+                "date": 1627430400000,
+                "text": "<p>Travellers are not required to complete any health and/or travel documentation. Airlines may require passengers to complete forms prior to landing.</p>",
+                "documentRequired": "No",
+                "travelDocumentationLink": null
+            },
+            "entry": {
+                "date": 1627430400000,
+                "text": "<p>Travellers arriving from or transiting through India, South Africa, China, Iran, Brazil, Ireland, the United Kingdom and the European Schengen Area countries of Austria, Belgium, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland, Portugal, Slovakia, Slovenia, Spain, Sweden, Switzerland, Monaco, San Marin and Vatican City within 14 days of their planned arrival in the US are barred from entry. US ESTA (Electronic System for Travel Authorization) holders are included within the restrictions. The restrictions do not apply to legal permanent residents or US citizens and their immediate family members, foreign diplomats with A or G visas and air and sea crew with C, D or C1/D visas. Travellers who require an ESTA must still apply and obtain one in advance of arrival.</p> <p>The US, Mexican and Canadian governments have agreed to close the US-Mexico and US-Canada borders to travellers crossing for non-essential purposes, including tourism and recreation, until 21 August. Movement of cross-border workers and commercial traffic are not affected by the measure.</p> <p>The State Department announced that it is indefinitely suspending all routine immigrant and non-immigrant visa services in most countries. Emergency visas will continue to be processed on an ad hoc basis.</p>",
+                "ban": "Partial",
+                "throughDate": "indef",
+                "rules": "https://www.cdc.gov/coronavirus/2019-ncov/travelers/from-other-countries.html",
+                "bannedArea": [
+                    {
+                        "iataCode": "AT",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "BE",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "BR",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "CA",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "CH",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "CN",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "CZ",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "DE",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "DK",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "EE",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "ES",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "FI",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "FR",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "GB",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "GR",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "HU",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "IE",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "IN",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "IR",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "IS",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "IT",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "LI",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "LT",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "LU",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "LV",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "MC",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "MT",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "MX",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "NL",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "NO",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "PL",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "PT",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "SE",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "SI",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "SK",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "SM",
+                        "areaType": "country"
+                    },
+                    {
+                        "iataCode": "ZA",
+                        "areaType": "country"
+                    }
+                ]
+            },
+            "diseaseTesting": {
+                "date": 1627430400000,
+                "text": "<p>All passengers on inbound international flights – including US citizens and fully vaccinated people – over the age of two must present a negative COVID-19 test result not older than 72 hours or medical documentation confirming that the traveller has contracted and recovered from COVID-19 in the past 3 months before boarding a flight to the US. An at-home NAAT or antigen SARS-CoV-2 viral test authorised by the Food and Drug Administration (FDA) may be used for this requirement.</p> <p>Flight crews, military personnel and urgent humanitarian or medical cases, including travellers unable to procure a pre-departure test at their point of embarkation, are exempt. A list of exemptions to testing is available at <a href=\"https://www.cdc.gov/quarantine/pdf/Global-Airline-Testing-Order-RPWSigned-Encrypted-p.pdf\" target=\"_blank\" rel=\"noopener\">https://www.cdc.gov/quarantine/pdf/Global-Airline-Testing-Order-RPWSigned-Encrypted-p.pdf</a>.</p>",
+                "isRequired": "Yes",
+                "when": "Before travel",
+                "requirement": "Mandatory",
+                "rules": "https://www.cdc.gov/coronavirus/2019-ncov/travelers/testing-international-air-travelers.html#:~:text=On%20January%2012%2C%202021%2C%20CDC,airline%20before%20boarding%20the%20flight.",
+                "testType": "PCR, Antigen, NAAT",
+                "minimumAge": 2,
+                "validityPeriod": {
+                    "delay": "P72H",
+                    "referenceDateType": "Departure"
+                }
+            },
+            "tracingApplication": {
+                "date": 1627430400000,
+                "text": "<p>There is no national contact tracing app. Local authorities have developed or are developing optional platforms through Apple’s Exposure Notification API in multiple states, including Alabama, Arizona, California, Colorado, Delaware, Maryland, Michigan, Nevada, New York, North Carolina, North Dakota, Oregon, Pennsylvania, South Carolina, Virginia Washington and Wyoming, the District of Columbia, and territories, including Guam and Puerto Rico.</p>",
+                "isRequired": "No",
+                "iosUrl": null,
+                "androidUrl": null
+            },
+            "mask": {
+                "date": 1627430400000,
+                "text": "<p>Some states and territories require residents to wear masks while out in public. Violators may be subject to fines and be denied entry to businesses and use of public transport. Most states and territories have voluntary measures or measures restricted to specific venues and municipalities.</p> <p>Enforcement varies widely and is not consistently enforced below the federal level. Masks must be worn in federal government buildings as well as on inter-state transport, including at airports and onboard flights, trains, planes, intercity buses and ferries until at least 13 September.</p>",
+                "isRequired": "Yes, conditional"
+            },
+            "exit": {
+                "date": 1627430400000,
+                "text": "<p>There are no exit restrictions though international travel is strongly discouraged.</p>",
+                "specialRequirements": "No",
+                "rulesLink": "https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories.html/",
+                "isBanned": "No"
+            },
+            "diseaseVaccination": {
+                "date": 1627430400000,
+                "text": "<p>Fullly vaccinated travellers do not need to self-quarantine upon arrival in the country but are still subject to testing requirements.</p> <p>Those fully vaccinated against COVID-19, with at least two weeks having passed since their last dose, are exempt from wearing facial coverings.</p>",
+                "isRequired": "No",
+                "referenceLink": "https://www.cdc.gov/coronavirus/2019-ncov/travelers/international-travel-during-covid19.html",
+                "acceptedCertificates": [
+                    "Not Specified"
+                ],
+                "qualifiedVaccines": [
+                    "Pfizer - 14 days after second dose.",
+                    "Johnson & Johnson - 14 days after first dose.",
+                    "Moderna - 14 days after second dose.",
+                    "Immunity through previous infection - positive test older than 90 days, not older than 3 months."
+                ],
+                "policy": "Yes",
+                "exemptions": "Quarantine, Masks"
+            }
+        },
+        "areaPolicy": {
+            "date": 1627430400000,
+            "text": "<p>Limited federal policies for quarantine, testing and masking are in effect nationwide. Most policy decisions are implemented at the state, county and municipal level.</p>",
+            "status": "Distancing",
+            "startDate": 1584316800000,
+            "endDate": "indef",
+            "referenceLink": "https://www.usa.gov/coronavirus"
+        },
+        "relatedArea": [
+            {
+                "methods": [
+                    "GET"
+                ],
+                "rel": "Parent"
+            }
+        ],
+        "areaVaccinated": [
+            {
+                "date": 1627603200000,
+                "vaccinationDoseStatus": "oneDose",
+                "percentage": 58.799
+            },
+            {
+                "date": 1627862400000,
+                "vaccinationDoseStatus": "fully",
+                "percentage": 49.31
+            }
+        ],
+        "type": "covid19-area-report"
+    }
+}

@@ -144,3 +144,36 @@ button#cst-modal-close:hover {
     font-size: 0.8em;
   }
 }
+
+.ant-popover-arrow {
+  height: 9px !important;
+}
+
+.ant-popover-arrow-content {
+  border: 1px solid;
+}
+
+.ant-popover-inner {
+  border: 1px solid;
+}
+
+.popover-body {
+  width: 300px;
+  font-size: 12px;
+}
+
+.popover-body>ul>li {
+  margin-top: 10px;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.left-column {
+  flex: 0.9
+}
+
+.right-column {
+  flex: 0.1
+}
