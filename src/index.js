@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Banner from './Banner/Banner';
+import CovidTravelSurvey from './CovidTravelSurvey';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
