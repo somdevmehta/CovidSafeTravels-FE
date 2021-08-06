@@ -75,16 +75,16 @@ export default class CovidRestricionDetails extends React.Component {
 			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
-				title: "Entry Ban",
+				title: "Entry Restriction",
 				content: (
 					<span>
 						<Badge status="processing" />
-						{entry.ban}
+						{entry.ban} Ban
 					</span>
 				),
 			},
 			{
-				title: "Through Date",
+				title: "Restrictions Applicable Till",
 				content: (
 					<span>
 						<Badge status="processing" />
@@ -142,7 +142,7 @@ export default class CovidRestricionDetails extends React.Component {
 				content: diseaseTesting.when,
 			},
 			{
-				title: "Test Type",
+				title: "Test Types",
 				content: diseaseTesting.testType,
 			},
 		];
@@ -166,13 +166,24 @@ export default class CovidRestricionDetails extends React.Component {
 	renderDeclarationDocumentation = () => {
 		const { declarationDocuments } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const { diseaseVaccination } =
+				this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
-				title: "Document Required?",
+				title: "Self Declaration Required?",
 				content: (
 					<span>
 						<Badge status="processing" />
 						{declarationDocuments.documentRequired}
+					</span>
+				),
+			},
+			{
+				title: "Vaccination Required?",
+				content: (
+						<span>
+						<Badge status="processing" />
+							{diseaseVaccination.isRequired}
 					</span>
 				),
 			},
@@ -183,6 +194,8 @@ export default class CovidRestricionDetails extends React.Component {
 				<br />
 				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
+				<br />
+				<p dangerouslySetInnerHTML={{ __html: diseaseVaccination.text }}></p>
 				<br />
 				<br />
 				{declarationDocuments.healthDocumentationLink ? (
@@ -428,7 +441,7 @@ export default class CovidRestricionDetails extends React.Component {
 						<p>{text}</p>
 					</Panel>
 					<Panel
-						header="Declaration Documentation"
+						header="Documentation Requirements"
 						key="3"
 						className="site-collapse-custom-panel"
 					>
@@ -510,7 +523,7 @@ export default class CovidRestricionDetails extends React.Component {
 		{ name: "Entry Restrictions", renderFn: this.renderEntryRestrictions },
 		{ name: "Diseases Testing Rules", renderFn: this.renderDiseasesTesting },
 		{
-			name: "Declaration Documentation",
+			name: "Documentation Requirements",
 			renderFn: this.renderDeclarationDocumentation,
 		},
 		{
