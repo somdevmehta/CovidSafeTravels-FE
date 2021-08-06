@@ -306,8 +306,8 @@ export default class CovidRestricionDetails extends React.Component {
 		console.log(mapColorData);
 		return (
 			<Datamap
-				style={{ height: 500, width: "80%" }}
-				projection="mercator"
+				style={{ height: 600, width: "100%" }}
+				projection="equirectangular"
 				geographyConfig={{
 					popupOnHover: true,
 					highlightOnHover: true,
@@ -416,7 +416,7 @@ export default class CovidRestricionDetails extends React.Component {
 			renderFn: this.renderDeclarationDocumentation,
 		},
 		{
-			name: "List of Banned Countries",
+			name: "Banned Countries",
 			renderFn: () => this.renderMap(this.state.mapColorData),
 		},
 		{
