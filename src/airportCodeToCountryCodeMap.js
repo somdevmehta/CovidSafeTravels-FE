@@ -7,6 +7,7 @@ const airportCountryMap = () => ({
 	JFK: "US",
 	NYC: "US",
 	BOM: "IN",
+	COK: "IN"
 });
 
 
