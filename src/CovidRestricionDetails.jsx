@@ -325,28 +325,79 @@ export default class CovidRestricionDetails extends React.Component {
 		const { bannedArea } =
 			this.props.covidRestrictionData.data.areaAccessRestriction.entry;
 		let mapColorData = {};
+		let countryLegends = [];
 		bannedArea.forEach((area) => {
-			mapColorData[countryMap()[area.iataCode]] = { fillKey: "CLOSED" };
+			if (countryMap()[area.iataCode]) {
+				mapColorData[countryMap()[area.iataCode]["alpha3"]] = {
+					fillKey: "CLOSED",
+				};
+				countryLegends.push(countryMap()[area.iataCode]["name"]);
+			}
 		});
 		console.log(mapColorData);
 		return (
-			<Datamap
-				style={{ height: 600, width: "100%" }}
-				projection="equirectangular"
-				geographyConfig={{
-					popupOnHover: true,
-					highlightOnHover: true,
-					borderColor: "#444",
-					borderWidth: 1,
-				}}
-				fills={{
-					defaultFill: "#dddddd",
-					OPEN: "#93d642",
-					PARTIAL: "#d68742",
-					CLOSED: "#d64242",
-				}}
-				data={mapColorData}
-			/>
+			<React.Fragment>
+				<Row gutter={16}>
+					<Col span={18}>
+						<Datamap
+							style={{
+								height: "550px",
+								backgroundColor: "#50d5fa",
+								border: "0.5px",
+								borderColor: "blue",
+								borderStyle: "solid",
+								boxShadow: "0.2px 1px 2px grey",
+							}}
+							projection="mercator"
+							// projection="equirectangular"
+							geographyConfig={{
+								popupOnHover: true,
+								highlightOnHover: true,
+								borderColor: "#444",
+								borderWidth: 1,
+							}}
+							fills={{
+								defaultFill: "#dddddd",
+								OPEN: "#93d642",
+								PARTIAL: "#d68742",
+								CLOSED: "#d64242",
+							}}
+							data={mapColorData}
+						/>
+					</Col>
+					<Col span={6}>
+						<span
+							style={{
+								backgroundColor: "#d64242",
+								minHeight: "40px",
+								display: "inline",
+							}}
+						>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</span>{" "}
+						- Entry banned from these countries
+						<div
+							style={{
+								overflowX: "scroll",
+								maxHeight: "550px",
+								marginTop: "15px"
+							}}
+						>
+							<List
+								size="small"
+								header={null}
+								footer={null}
+								bordered
+								dataSource={countryLegends}
+								renderItem={(item) => <List.Item>{item}</List.Item>}
+							/>
+							{/* {countryLegends.map((country) => {
+								return <div>{country}</div>;
+							})} */}
+						</div>
+					</Col>
+				</Row>
+			</React.Fragment>
 		);
 	};
 
@@ -434,19 +485,26 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderTabName = (tabName, index) => {
-		if(index === 0) {
-			const {ban} = this.props.covidRestrictionData.data.areaAccessRestriction.entry
-			return (<React.Fragment>
-				{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
-				</React.Fragment>);
-		} else if(index === 1) {
-			const {requirement} = this.props.covidRestrictionData.data.areaAccessRestriction.diseaseTesting;
-			return (<React.Fragment>
-				{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
-				</React.Fragment>);
+		if (index === 0) {
+			const { ban } =
+				this.props.covidRestrictionData.data.areaAccessRestriction.entry;
+			return (
+				<React.Fragment>
+					{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
+				</React.Fragment>
+			);
+		} else if (index === 1) {
+			const { requirement } =
+				this.props.covidRestrictionData.data.areaAccessRestriction
+					.diseaseTesting;
+			return (
+				<React.Fragment>
+					{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
+				</React.Fragment>
+			);
 		}
 		return tabName;
-	}
+	};
 
 	tabs = [
 		{ name: "Entry Restrictions", renderFn: this.renderEntryRestrictions },
