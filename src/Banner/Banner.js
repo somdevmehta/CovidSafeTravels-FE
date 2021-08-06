@@ -69,7 +69,7 @@ class Banner extends React.Component {
 			this.state.covidRestrictionData.data.areaAccessRestriction.diseaseTesting
 				.isRequired.toUpperCase();
                 /*
-                // Uncomment to run locally
+                // Uncomment to run locally:
 		const bannerItems = [
 			{ text: "Entry Guidelines: " + entryBan, icon: "" }, // chrome.runtime.getURL("build/images/safety.png") },
 			{ text: "Testing Requirements: " + diseaseTesting, icon: "" }, // chrome.runtime.getURL("build/images/test-results.png") },

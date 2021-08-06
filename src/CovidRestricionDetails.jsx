@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Row, Col, Collapse, PageHeader, Tabs, Divider } from "antd";
+import {
+	Row,
+	Col,
+	Collapse,
+	PageHeader,
+	Tabs,
+	Divider,
+	List,
+	Card,
+	Badge,
+} from "antd";
 import Datamap from "react-datamaps";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
@@ -34,16 +44,58 @@ export default class CovidRestricionDetails extends React.Component {
 		return <p>{text}</p>;
 	};
 
+	renderCardList = (data) => {
+		return (
+			<List
+				grid={{
+					gutter: 16,
+					xs: 1,
+					sm: 2,
+					md: 4,
+					lg: 4,
+					xl: 6,
+					xxl: 3,
+				}}
+				dataSource={data}
+				renderItem={(item) => (
+					<List.Item>
+						<Card title={item.title} size="small">
+							{item.content}
+						</Card>
+					</List.Item>
+				)}
+			/>
+		);
+	};
+
 	renderEntryRestrictions = () => {
 		const { entry } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const data = [
+			{
+				title: "Entry Ban",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{entry.ban}
+					</span>
+				),
+			},
+			{
+				title: "Through Date",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{entry.throughDate}
+					</span>
+				),
+			},
+		];
 		return (
 			<React.Fragment>
-				<p>Entry Ban: {entry.ban}</p>
-				<p>Through Date? {entry.throughDate}</p>
+				{this.renderCardList(data)}
 				<br />
-				<br />
-				<p>More Info:</p>
+				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: entry.text }}></p>
 				<br />
 				<br />
@@ -64,15 +116,39 @@ export default class CovidRestricionDetails extends React.Component {
 	renderDiseasesTesting = () => {
 		const { diseaseTesting } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const data = [
+			{
+				title: "Disease Testing",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{diseaseTesting.isRequired}
+					</span>
+				),
+			},
+			{
+				title: "Requirement",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{diseaseTesting.requirement}
+					</span>
+				),
+			},
+			{
+				title: "When?",
+				content: diseaseTesting.when,
+			},
+			{
+				title: "Test Type",
+				content: diseaseTesting.testType,
+			},
+		];
 		return (
 			<React.Fragment>
-				<p>Disease Testing: {diseaseTesting.isRequired}</p>
-				<p>When? {diseaseTesting.when}</p>
-				<p>Requirement: {diseaseTesting.requirement}</p>
-				<p>Test Type: {diseaseTesting.testType}</p>
+				{this.renderCardList(data)}
 				<br />
-				<br />
-				<p>More Info:</p>
+				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: diseaseTesting.text }}></p>
 				<br />
 				<br />
@@ -88,12 +164,22 @@ export default class CovidRestricionDetails extends React.Component {
 	renderDeclarationDocumentation = () => {
 		const { declarationDocuments } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const data = [
+			{
+				title: "Document Required?",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{declarationDocuments.documentRequired}
+					</span>
+				),
+			},
+		];
 		return (
 			<React.Fragment>
-				<p>Document Required?: {declarationDocuments.documentRequired}</p>
+				{this.renderCardList(data)}
 				<br />
-				<br />
-				<p>More Info:</p>
+				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
 				<br />
 				<br />
@@ -120,20 +206,29 @@ export default class CovidRestricionDetails extends React.Component {
 	renderDiseaseTracing = () => {
 		const { tracingApplication } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const data = [
+			{
+				title: "Required?",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{tracingApplication.isRequired}
+					</span>
+				),
+			},
+		];
 		return (
 			<React.Fragment>
-				<p>Required?: {tracingApplication.isRequired}</p>
+				{this.renderCardList(data)}
 				<br />
-				<br />
+				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: tracingApplication.text }}></p>
 				<br />
 				<br />
 				{tracingApplication.iosUrl ? (
 					<p>
 						iOS:{" "}
-						<a href={tracingApplication.iosUrl}>
-							{tracingApplication.iosUrl}
-						</a>
+						<a href={tracingApplication.iosUrl}>{tracingApplication.iosUrl}</a>
 					</p>
 				) : null}
 				{tracingApplication.androidUrl ? (
@@ -149,18 +244,52 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderMasksQuarantine = () => {
-		const { mask } =
-			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const { mask } = this.props.covidRestrictionData.data.areaAccessRestriction;
+		const data = [
+			{
+				title: "Required?",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{mask.isRequired}
+					</span>
+				),
+			},
+		];
 		return (
 			<React.Fragment>
-				<p>Required?: {mask.isRequired}</p>
+				{this.renderCardList(data)}
 				<br />
-				<br />
+				<Divider orientation="left">More Info</Divider>
 				<p dangerouslySetInnerHTML={{ __html: mask.text }}></p>
 				<br />
 				<br />
 			</React.Fragment>
 		);
+	};
+
+	renderAreaRestrictions = () => {
+		const { areaRestrictions } = this.props.covidRestrictionData.data;
+		if (areaRestrictions && areaRestrictions.length > 0) {
+			return (
+				<React.Fragment>
+					{areaRestrictions.map((restriction) => {
+						return (
+							<React.Fragment>
+								<Divider orientation="left">
+									Restriction Type: {restriction.restrictionType}
+								</Divider>
+								<br />
+								<p dangerouslySetInnerHTML={{ __html: restriction.text }}></p>
+								<br />
+								<br />
+							</React.Fragment>
+						);
+					})}
+				</React.Fragment>
+			);
+		}
+		return <p>Area restriction data not available for this destination</p>;
 	};
 
 	changeTabPosition = (e) => {
@@ -290,16 +419,30 @@ export default class CovidRestricionDetails extends React.Component {
 			name: "List of Banned Countries",
 			renderFn: () => this.renderMap(this.state.mapColorData),
 		},
-		{ name: "Disease Tracing Applications", renderFn: this.renderDiseaseTracing },
+		{
+			name: "Disease Tracing Applications",
+			renderFn: this.renderDiseaseTracing,
+		},
 		{ name: "Masks & Quarantine Rules", renderFn: this.renderMasksQuarantine },
-		{ name: "Ongoing Area Restrictions", renderFn: this.renderText },
+		{
+			name: "Ongoing Area Restrictions",
+			renderFn: this.renderAreaRestrictions,
+		},
 	];
 
 	render() {
 		return (
 			<Tabs tabPosition={"left"}>
 				{this.tabs.map((tab) => (
-					<TabPane tab={tab.name} key={tab.name} style={{ height: "600px" }}>
+					<TabPane
+						tab={tab.name}
+						key={tab.name}
+						style={{
+							height: "600px",
+							overflow: "scroll",
+							textAlign: "justify",
+						}}
+					>
 						<span style={{ color: "var(--primary-color)" }}>{tab.name}</span>
 						<Divider style={{ marginTop: 0 }} />
 						{tab.renderFn()}
