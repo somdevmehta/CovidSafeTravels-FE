@@ -75,16 +75,16 @@ export default class CovidRestricionDetails extends React.Component {
 			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
-				title: "Entry Ban",
+				title: "Entry Restriction",
 				content: (
 					<span>
 						<Badge status="processing" />
-						{entry.ban}
+						{entry.ban} Ban
 					</span>
 				),
 			},
 			{
-				title: "Through Date",
+				title: "Restrictions Applicable Till",
 				content: (
 					<span>
 						<Badge status="processing" />
@@ -158,7 +158,7 @@ export default class CovidRestricionDetails extends React.Component {
 					</span>
 			},
 			{
-				title: "Test Type",
+				title: "Test Types",
 				content:
 					<span>
 						<Badge status="processing" />
@@ -189,13 +189,24 @@ export default class CovidRestricionDetails extends React.Component {
 	renderDeclarationDocumentation = () => {
 		const { declarationDocuments } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const { diseaseVaccination } =
+				this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
-				title: "Document Required?",
+				title: "Self Declaration Required?",
 				content: (
 					<span>
 						<Badge status="processing" />
 						{declarationDocuments.documentRequired}
+					</span>
+				),
+			},
+			{
+				title: "Vaccination Required?",
+				content: (
+						<span>
+						<Badge status="processing" />
+							{diseaseVaccination.isRequired}
 					</span>
 				),
 			},
@@ -209,6 +220,8 @@ export default class CovidRestricionDetails extends React.Component {
 				</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
+				<br />
+				<p dangerouslySetInnerHTML={{ __html: diseaseVaccination.text }}></p>
 				<br />
 				<br />
 				{declarationDocuments.healthDocumentationLink ? (
@@ -356,28 +369,79 @@ export default class CovidRestricionDetails extends React.Component {
 		const { bannedArea } =
 			this.props.covidRestrictionData.data.areaAccessRestriction.entry;
 		let mapColorData = {};
+		let countryLegends = [];
 		bannedArea.forEach((area) => {
-			mapColorData[countryMap()[area.iataCode]] = { fillKey: "CLOSED" };
+			if (countryMap()[area.iataCode]) {
+				mapColorData[countryMap()[area.iataCode]["alpha3"]] = {
+					fillKey: "CLOSED",
+				};
+				countryLegends.push(countryMap()[area.iataCode]["name"]);
+			}
 		});
 		console.log(mapColorData);
 		return (
-			<Datamap
-				style={{ height: 600, width: "100%" }}
-				projection="equirectangular"
-				geographyConfig={{
-					popupOnHover: true,
-					highlightOnHover: true,
-					borderColor: "#444",
-					borderWidth: 1,
-				}}
-				fills={{
-					defaultFill: "#dddddd",
-					OPEN: "#93d642",
-					PARTIAL: "#d68742",
-					CLOSED: "#d64242",
-				}}
-				data={mapColorData}
-			/>
+			<React.Fragment>
+				<Row gutter={16}>
+					<Col span={18}>
+						<Datamap
+							style={{
+								height: "550px",
+								backgroundColor: "#50d5fa",
+								border: "0.5px",
+								borderColor: "blue",
+								borderStyle: "solid",
+								boxShadow: "0.2px 1px 2px grey",
+							}}
+							projection="mercator"
+							// projection="equirectangular"
+							geographyConfig={{
+								popupOnHover: true,
+								highlightOnHover: true,
+								borderColor: "#444",
+								borderWidth: 1,
+							}}
+							fills={{
+								defaultFill: "#dddddd",
+								OPEN: "#93d642",
+								PARTIAL: "#d68742",
+								CLOSED: "#d64242",
+							}}
+							data={mapColorData}
+						/>
+					</Col>
+					<Col span={6}>
+						<span
+							style={{
+								backgroundColor: "#d64242",
+								minHeight: "40px",
+								display: "inline",
+							}}
+						>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</span>{" "}
+						- Entry banned from these countries
+						<div
+							style={{
+								overflowX: "scroll",
+								maxHeight: "550px",
+								marginTop: "15px"
+							}}
+						>
+							<List
+								size="small"
+								header={null}
+								footer={null}
+								bordered
+								dataSource={countryLegends}
+								renderItem={(item) => <List.Item>{item}</List.Item>}
+							/>
+							{/* {countryLegends.map((country) => {
+								return <div>{country}</div>;
+							})} */}
+						</div>
+					</Col>
+				</Row>
+			</React.Fragment>
 		);
 	};
 
@@ -408,7 +472,7 @@ export default class CovidRestricionDetails extends React.Component {
 						<p>{text}</p>
 					</Panel>
 					<Panel
-						header="Declaration Documentation"
+						header="Documentation Requirements"
 						key="3"
 						className="site-collapse-custom-panel"
 					>
@@ -477,13 +541,13 @@ export default class CovidRestricionDetails extends React.Component {
 			</React.Fragment>);
 		}
 		return tabName;
-	}
+	};
 
 	tabs = [
 		{ name: "Entry Restrictions", renderFn: this.renderEntryRestrictions },
 		{ name: "Diseases Testing Rules", renderFn: this.renderDiseasesTesting },
 		{
-			name: "Declaration Documentation",
+			name: "Documentation Requirements",
 			renderFn: this.renderDeclarationDocumentation,
 		},
 		{
