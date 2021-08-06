@@ -71,7 +71,7 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderEntryRestrictions = () => {
-		const { entry } =
+		const { entry , mask } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
@@ -92,12 +92,24 @@ export default class CovidRestricionDetails extends React.Component {
 					</span>
 				),
 			},
+			{
+				title: "Masks Required",
+				content: (
+					<span>
+						<Badge status="processing" />
+						{mask.isRequired}
+					</span>
+				),
+			}
 		];
 		return (
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<Divider orientation="left">More Info</Divider>
+				<span className="modal-heading">
+					More Info
+				</span>
+				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: entry.text }}></p>
 				<br />
 				<br />
@@ -139,18 +151,29 @@ export default class CovidRestricionDetails extends React.Component {
 			},
 			{
 				title: "When?",
-				content: diseaseTesting.when,
+				content:
+					<span>
+						<Badge status="processing" />
+						{diseaseTesting.when}
+					</span>
 			},
 			{
 				title: "Test Type",
-				content: diseaseTesting.testType,
+				content:
+					<span>
+						<Badge status="processing" />
+						{diseaseTesting.testType}
+					</span>
 			},
 		];
 		return (
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<Divider orientation="left">More Info</Divider>
+				<span className="modal-heading">
+					More Info
+				</span>
+				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: diseaseTesting.text }}></p>
 				<br />
 				<br />
@@ -181,7 +204,10 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<Divider orientation="left">More Info</Divider>
+				<span className="modal-heading">
+					More Info
+				</span>
+				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
 				<br />
 				<br />
@@ -223,7 +249,10 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<Divider orientation="left">More Info</Divider>
+				<span className="modal-heading">
+					More Info
+				</span>
+				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: tracingApplication.text }}></p>
 				<br />
 				<br />
@@ -262,7 +291,10 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<Divider orientation="left">More Info</Divider>
+				<span className="modal-heading">
+					More Info
+				</span>
+				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: mask.text }}></p>
 				<br />
 				<br />
@@ -277,16 +309,15 @@ export default class CovidRestricionDetails extends React.Component {
 				<React.Fragment>
 					{areaRestrictions.map((restriction) => {
 						return (
-							<React.Fragment>
-								<span style={{ color: "var(--primary-color)" }}>
+							<div className="ongoing-restrictions">
+								<span className="modal-heading">
 									Restriction Type: <b>{restriction.restrictionType}</b>
 								</span>
 								<Divider style={{ marginTop: 0 }} />
-								<br />
 								<p dangerouslySetInnerHTML={{ __html: restriction.text }}></p>
 								<br />
 								<br />
-							</React.Fragment>
+							</div>
 						);
 					})}
 				</React.Fragment>
@@ -434,16 +465,16 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderTabName = (tabName, index) => {
-		if(index === 0) {
-			const {ban} = this.props.covidRestrictionData.data.areaAccessRestriction.entry
+		if (index === 0) {
+			const { ban } = this.props.covidRestrictionData.data.areaAccessRestriction.entry
 			return (<React.Fragment>
 				{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
-				</React.Fragment>);
-		} else if(index === 1) {
-			const {requirement} = this.props.covidRestrictionData.data.areaAccessRestriction.diseaseTesting;
+			</React.Fragment>);
+		} else if (index === 1) {
+			const { requirement } = this.props.covidRestrictionData.data.areaAccessRestriction.diseaseTesting;
 			return (<React.Fragment>
 				{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
-				</React.Fragment>);
+			</React.Fragment>);
 		}
 		return tabName;
 	}
@@ -463,7 +494,6 @@ export default class CovidRestricionDetails extends React.Component {
 			name: "Disease Tracing Applications",
 			renderFn: this.renderDiseaseTracing,
 		},
-		{ name: "Masks & Quarantine Rules", renderFn: this.renderMasksQuarantine },
 		{
 			name: "Ongoing Area Restrictions",
 			renderFn: this.renderAreaRestrictions,
@@ -490,11 +520,12 @@ export default class CovidRestricionDetails extends React.Component {
 								height: "600px",
 								overflow: scroll,
 								textAlign: "justify",
+								fontSize: "12px" 
 							}}
 						>
-							{index !== 6 ? (
+							{index !== 5 ? (
 								<React.Fragment>
-									<span style={{ color: "var(--primary-color)" }}>
+									<span className="modal-heading">
 										{tab.name}
 									</span>
 									<Divider style={{ marginTop: 0 }} />
@@ -502,6 +533,7 @@ export default class CovidRestricionDetails extends React.Component {
 							) : null}
 
 							{tab.renderFn()}
+							{/* <div className="last-updated"> last updated at</div> */}
 						</TabPane>
 					);
 				})}

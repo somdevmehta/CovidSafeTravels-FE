@@ -53,7 +53,7 @@ class Banner extends React.Component {
         const country = covidRestrictionData.data.area.name.toUpperCase();
         return (
             <Modal
-                title={`Travel Advisory for travelling to ${country}`}
+                title={`COVID-SafeTravels : Travel Advisory for ${country}`}
                 visible={this.state.isModalVisible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
@@ -94,22 +94,38 @@ class Banner extends React.Component {
             </div>);
     }
 
+
     testingPopover = (data = this.state.covidRestrictionData.data.areaAccessRestriction) => {
         const diseaseTesting = data.diseaseTesting.requirement.toUpperCase();
         const testType = data.diseaseTesting.testType.toUpperCase();
-        const validity = data.diseaseTesting.validityPeriod.delay.substring(1);
+        const validity = data.diseaseTesting.validityPeriod.delay.substring(1).toUpperCase();
 
         return (
             <div className="popover-body">
-                <div>
-                    Covid Test Required: {diseaseTesting}
-                </div>
-                <div>
-                    Test Type: {testType}
-                </div>
-                <div>
-                    Validity: {validity}
-                </div>
+                <ul>
+                    {diseaseTesting &&
+                        <li>
+                            <div className="flexBox">
+                                <div className="left-column">Covid Test Required:</div>
+                                <div className="right-column">{diseaseTesting}</div>
+                            </div>
+                        </li>}
+                    {testType &&
+                        <li>
+                            <div className="flexBox">
+                                <div className="left-column">Test Type:</div>
+                                <div className="right-column">{testType}</div>
+                            </div>
+                        </li>}
+                    {validity &&
+                        <li>
+                            <div className="flexBox">
+                                <div className="left-column">Test Validity:</div>
+                                <div className="right-column">{validity}</div>
+                            </div>
+                        </li>
+                    }
+                </ul>
             </div>);
     }
 

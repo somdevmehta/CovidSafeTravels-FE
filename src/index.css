@@ -177,3 +177,27 @@ button#cst-modal-close:hover {
 .right-column {
   flex: 0.1
 }
+
+.ongoing-restrictions strong {
+  font-weight: 700;
+}
+
+
+.ant-card-head-wrapper, .ant-card-body {
+  font-size: 12px;
+}
+
+.ant-card-small {
+  min-width: 200px;
+}
+
+.modal-heading {
+  color: "var(--primary-color)";
+  font-size: 14px
+}
+
+.last-updated {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
