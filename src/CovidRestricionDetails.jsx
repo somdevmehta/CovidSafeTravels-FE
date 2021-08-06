@@ -9,9 +9,11 @@ import {
 	List,
 	Card,
 	Badge,
+	Comment,
+	Tag,
 } from "antd";
 import Datamap from "react-datamaps";
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -276,9 +278,10 @@ export default class CovidRestricionDetails extends React.Component {
 					{areaRestrictions.map((restriction) => {
 						return (
 							<React.Fragment>
-								<Divider orientation="left">
-									Restriction Type: {restriction.restrictionType}
-								</Divider>
+								<span style={{ color: "var(--primary-color)" }}>
+									Restriction Type: <b>{restriction.restrictionType}</b>
+								</span>
+								<Divider style={{ marginTop: 0 }} />
 								<br />
 								<p dangerouslySetInnerHTML={{ __html: restriction.text }}></p>
 								<br />
@@ -290,6 +293,28 @@ export default class CovidRestricionDetails extends React.Component {
 			);
 		}
 		return <p>Area restriction data not available for this destination</p>;
+	};
+
+	renderTravellerComments = () => {
+		const { surveyList } = this.props.surveyData;
+		if (surveyList && surveyList.length > 0) {
+			return (
+				<React.Fragment>
+					{surveyList.map((survey) => {
+						return (
+							<Comment
+								key={`comment-${survey.name}`}
+								author={survey.name}
+								avatar={<UserOutlined />}
+								content={<p>{survey.covidReview}</p>}
+								datetime={<span>{survey.date}</span>}
+							/>
+						);
+					})}
+				</React.Fragment>
+			);
+		}
+		return <p>Survey data not available for this destination</p>;
 	};
 
 	changeTabPosition = (e) => {
@@ -408,6 +433,21 @@ export default class CovidRestricionDetails extends React.Component {
 		);
 	};
 
+	renderTabName = (tabName, index) => {
+		if(index === 0) {
+			const {ban} = this.props.covidRestrictionData.data.areaAccessRestriction.entry
+			return (<React.Fragment>
+				{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
+				</React.Fragment>);
+		} else if(index === 1) {
+			const {requirement} = this.props.covidRestrictionData.data.areaAccessRestriction.diseaseTesting;
+			return (<React.Fragment>
+				{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
+				</React.Fragment>);
+		}
+		return tabName;
+	}
+
 	tabs = [
 		{ name: "Entry Restrictions", renderFn: this.renderEntryRestrictions },
 		{ name: "Diseases Testing Rules", renderFn: this.renderDiseasesTesting },
@@ -428,26 +468,43 @@ export default class CovidRestricionDetails extends React.Component {
 			name: "Ongoing Area Restrictions",
 			renderFn: this.renderAreaRestrictions,
 		},
+		{
+			name: "Traveller Comments",
+			renderFn: this.renderTravellerComments,
+		},
 	];
 
 	render() {
 		return (
 			<Tabs tabPosition={"left"}>
-				{this.tabs.map((tab) => (
-					<TabPane
-						tab={tab.name}
-						key={tab.name}
-						style={{
-							height: "600px",
-							overflow: "scroll",
-							textAlign: "justify",
-						}}
-					>
-						<span style={{ color: "var(--primary-color)" }}>{tab.name}</span>
-						<Divider style={{ marginTop: 0 }} />
-						{tab.renderFn()}
-					</TabPane>
-				))}
+				{this.tabs.map((tab, index) => {
+					let scroll = "scroll";
+					if (index === 3) {
+						scroll = "hidden";
+					}
+					return (
+						<TabPane
+							tab={this.renderTabName(tab.name, index)}
+							key={tab.name}
+							style={{
+								height: "600px",
+								overflow: scroll,
+								textAlign: "justify",
+							}}
+						>
+							{index !== 6 ? (
+								<React.Fragment>
+									<span style={{ color: "var(--primary-color)" }}>
+										{tab.name}
+									</span>
+									<Divider style={{ marginTop: 0 }} />
+								</React.Fragment>
+							) : null}
+
+							{tab.renderFn()}
+						</TabPane>
+					);
+				})}
 			</Tabs>
 			// <div className="site-card-wrapper">
 			// 	<Row gutter={16}>

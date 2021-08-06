@@ -9,6 +9,7 @@ class Banner extends React.Component {
 	state = {
 		isModalVisible: false,
 		covidRestrictionData: null,
+        surveyData: null
 	};
 
 
@@ -19,9 +20,10 @@ class Banner extends React.Component {
 
 	getCovidRestrictionData = () => {
 		axios
-			.get("http://localhost:8080/covidDetails?country=FR")
+			.get("http://localhost:8080/covidDetails?country=IN")
 			.then((response) => {
-				this.setState({ covidRestrictionData: response.data });
+				this.setState({ covidRestrictionData: response.data.travelRestrictionsResponseContainer,
+                    surveyData: response.data.surveyDetailsContainer });
 				console.log(response.data);
 			})
 			.catch((err) => {
@@ -41,7 +43,7 @@ class Banner extends React.Component {
 		this.handleModalToggle(false);
 	};
 
-	renderModal = (destination, covidRestrictionData) => {
+	renderModal = (destination, covidRestrictionData, surveyData) => {
         const country = covidRestrictionData.data.area.name.toUpperCase();
 		return (
 			<Modal
@@ -52,14 +54,14 @@ class Banner extends React.Component {
 				width={"80%"}
 				footer={null}
 			>
-				<CovidRestricionDetails covidRestrictionData={covidRestrictionData} />
+				<CovidRestricionDetails covidRestrictionData={covidRestrictionData} surveyData={surveyData} />
 			</Modal>
 		);
 	};
 
 	render() {
 		const { source, destination } = this.props;
-		const { covidRestrictionData } = this.state;
+		const { covidRestrictionData, surveyData } = this.state;
 		if (covidRestrictionData === null) {
 			return null;
 		}
@@ -68,14 +70,14 @@ class Banner extends React.Component {
 		const diseaseTesting =
 			this.state.covidRestrictionData.data.areaAccessRestriction.diseaseTesting
 				.isRequired.toUpperCase();
-                /*
+                
+        /*
                 // Uncomment to run locally:
 		const bannerItems = [
 			{ text: "Entry Guidelines: " + entryBan, icon: "" }, // chrome.runtime.getURL("build/images/safety.png") },
 			{ text: "Testing Requirements: " + diseaseTesting, icon: "" }, // chrome.runtime.getURL("build/images/test-results.png") },
 			{ text: "Additional Travel Info", icon: "" }, // chrome.runtime.getURL("build/images/passport.png") }
-		];
-        */
+		];*/
         const bannerItems = [
             { text: "Entry Guidelines: " + entryBan, icon: chrome.runtime.getURL("build/images/safety.png") },
             { text: "Testing Requirements: " + diseaseTesting, icon:  chrome.runtime.getURL("build/images/test-results.png") },
@@ -83,7 +85,7 @@ class Banner extends React.Component {
         ]
 		return (
 			<div className="banner-background">
-				{this.renderModal(destination, covidRestrictionData)}
+				{this.renderModal(destination, covidRestrictionData, surveyData)}
 				<div className="banner-heading">
 					<span>
 						<span>COVID-SafeTravels : </span> Here are some guidelines to help
