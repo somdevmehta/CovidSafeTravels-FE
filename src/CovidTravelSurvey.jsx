@@ -203,7 +203,7 @@ export default class CovidTravelSurvey extends React.Component {
 									</Form.Item>
 									<Form.Item
 										name={["source"]}
-										label="Travelled To"
+										label="Travelled from"
 										rules={[{ required: true }]}
 									>
 										{this.renderCountrySelection()}
