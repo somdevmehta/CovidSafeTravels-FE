@@ -95,7 +95,7 @@ export default class CovidRestricionDetails extends React.Component {
 				content: (
 					<span>
 						<Badge status="processing" />
-						{entry.throughDate === "indef" ? "Indefinitely" :entry.throughDate}
+						{entry.throughDate === "indef" ? "Indefinitely" : entry.throughDate}
 					</span>
 				),
 			},
@@ -192,10 +192,10 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderDeclarationDocumentation = () => {
-		const { declarationDocuments } =
+		const { declarationDocuments, diseaseVaccination } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
-		const { diseaseVaccination } =
-			this.props.covidRestrictionData.data.areaAccessRestriction;
+		const { acceptedCertificates } = diseaseVaccination;
+
 		const data = [
 			{
 				title: "Self Declaration Required?",
@@ -213,6 +213,18 @@ export default class CovidRestricionDetails extends React.Component {
 						<Badge status="processing" />
 						{diseaseVaccination.isRequired}
 					</span>
+				),
+			},
+			{
+				title: "Accepted Certificates",
+				content: (
+					acceptedCertificates && acceptedCertificates.length > 0 ? (
+						<ul>
+							{acceptedCertificates.map((cert) => {
+								return <li>{" - "}{cert}</li>;
+							})}
+						</ul>
+					) : null
 				),
 			},
 		];
@@ -356,27 +368,25 @@ export default class CovidRestricionDetails extends React.Component {
 								key={`comment-${survey.name}`}
 								author={survey.name}
 								avatar={<UserOutlined />}
-								content={<React.Fragment>
-									<p style={{ fontSize: "10px"}}> 
-										{survey.recommend ? (
-											<span>
-												<CheckCircleTwoTone /> &nbsp; Recommends
-											</span>
-										) : (
-											<span>
-												<StopTwoTone /> &nbsp; Does not Recommend
-											</span>
-										)}
-										&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-										{`Travelled from ${travelledFrom}`}
-									</p>
-									<p>{survey.covidReview}</p>
-								</React.Fragment>}
-								datetime={
-									<span>
-										{survey.date}
-									</span>
+								content={
+									<React.Fragment>
+										<p style={{ fontSize: "10px" }}>
+											{survey.recommend ? (
+												<span>
+													<CheckCircleTwoTone /> &nbsp; Recommends
+												</span>
+											) : (
+												<span>
+													<StopTwoTone /> &nbsp; Does not Recommend
+												</span>
+											)}
+											&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+											{`Travelled from ${travelledFrom}`}
+										</p>
+										<p>{survey.covidReview}</p>
+									</React.Fragment>
 								}
+								datetime={<span>{survey.date}</span>}
 							/>
 						);
 					})}
@@ -386,8 +396,10 @@ export default class CovidRestricionDetails extends React.Component {
 		return <p>Survey data not available for this destination</p>;
 	};
 	renderSummaryTab = () => {
-		const { areaVaccinated, summary } = this.props.covidRestrictionData.data;
+		const { areaVaccinated, summary, areaAccessRestriction } =
+			this.props.covidRestrictionData.data;
 		const { country } = this.props;
+		const { qualifiedVaccines } = areaAccessRestriction.diseaseVaccination;
 
 		return (
 			<React.Fragment>
@@ -406,7 +418,17 @@ export default class CovidRestricionDetails extends React.Component {
 							value={`${areaVaccinated[0].percentage} %`}
 						/>
 					</Col>
-					<Col span={12}>&nbsp;</Col>
+					<Col span={12}>
+						{qualifiedVaccines && qualifiedVaccines.length > 0 ? (
+							<Card title={"Qualified vaccines"} size="small">
+								<ul>
+								{qualifiedVaccines.map((vaccine) => {
+									return <li>{" - "}{vaccine}</li>;
+								})}
+								</ul>
+							</Card>
+						) : null}
+					</Col>
 				</Row>
 				<br />
 				<br />
