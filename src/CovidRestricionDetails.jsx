@@ -380,7 +380,6 @@ export default class CovidRestricionDetails extends React.Component {
 	renderSummaryTab = () => {
 		const { areaVaccinated, summary } = this.props.covidRestrictionData.data;
 		const { country } = this.props;
-		const { surveyList, percentRecommend } = this.props.surveyData;
 
 		return (
 			<React.Fragment>
