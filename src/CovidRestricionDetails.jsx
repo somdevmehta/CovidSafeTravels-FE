@@ -661,7 +661,7 @@ export default class CovidRestricionDetails extends React.Component {
 			renderFn: this.renderTravellerComments,
 		},
 		{
-			name: "Summary",
+			name: "Vaccination coverage",
 			renderFn: this.renderSummaryTab,
 		},
 	];

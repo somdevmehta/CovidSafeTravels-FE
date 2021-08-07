@@ -206,7 +206,6 @@ button#cst-modal-close:hover {
   top: 6px;
   right: 0px;
   font-size: 10px;
-  color: rgb(204, 204, 204);
 }
 
 .ant-comment-avatar span svg {
@@ -217,4 +216,25 @@ button#cst-modal-close:hover {
 .ant-tag-volcano {
   font-size: 9px !important;
   vertical-align:  bottom;
+}
+
+.mobile-view {
+  display: none;
+}
+
+@media(max-width:550px) {
+  .mobile-view {
+    display: block;
+  }
+  .desktop-view {
+    display: none;
+  }
+  .last-updated {
+    display: none;
+  }
+  .ant-modal-body {
+    max-height: 600px;
+    overflow: scroll;
+    height: 600px;
+  }
 }

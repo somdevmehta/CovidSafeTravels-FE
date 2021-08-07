@@ -3,6 +3,7 @@ import React from "react";
 import BannerItem from "./BannerItem";
 import { Modal } from "antd";
 import CovidRestricionDetails from "../CovidRestricionDetails";
+import CovidRestricionDetailsMobile from "../CovidRestricionDetailsMobile";
 import { getAlpha2CountryCode } from "../airportCodeToCountryCodeMap";
 import axios from "axios";
 
@@ -19,9 +20,12 @@ class Banner extends React.Component {
 		const sourceCountryCode = getAlpha2CountryCode(source);
 		const destinationCountryCode = getAlpha2CountryCode(destination);
 
-		if (destinationCountryCode && sourceCountryCode !== destinationCountryCode){
+		if (
+			destinationCountryCode &&
+			sourceCountryCode !== destinationCountryCode
+		) {
 			this.getCovidRestrictionData(destinationCountryCode);
-        }
+		}
 	}
 
 	getCovidRestrictionData = (destinationCountryCode) => {
@@ -69,12 +73,22 @@ class Banner extends React.Component {
 				width={"80%"}
 				footer={null}
 			>
-				<CovidRestricionDetails
-					covidRestrictionData={covidRestrictionData}
-					surveyData={surveyData}
-                    country={country}
-                    sourceCountry={getAlpha2CountryCode(source)}
-				/>
+				<div className="mobile-view">
+					<CovidRestricionDetailsMobile
+						covidRestrictionData={covidRestrictionData}
+						surveyData={surveyData}
+						country={country}
+						sourceCountry={getAlpha2CountryCode(source)}
+					/>
+				</div>
+				<div className="desktop-view">
+					<CovidRestricionDetails
+						covidRestrictionData={covidRestrictionData}
+						surveyData={surveyData}
+						country={country}
+						sourceCountry={getAlpha2CountryCode(source)}
+					/>
+				</div>
 			</Modal>
 		);
 	};
@@ -92,10 +106,10 @@ class Banner extends React.Component {
 					{entryBan && (
 						<li>
 							<div className="flexBox">
-								<div style={{flex: "0.4"}}>
-                                Restrictions:
+								<div style={{ flex: "0.4" }}>Restrictions:</div>
+								<div style={{ flex: "0.6", textAlign: "right" }}>
+									{entryBan} Ban implemented
 								</div>
-								<div style={{flex: "0.6", textAlign: "right"}}>{entryBan} Ban implemented</div>
 							</div>
 						</li>
 					)}
