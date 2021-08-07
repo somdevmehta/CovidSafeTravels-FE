@@ -369,6 +369,7 @@ export default class CovidRestricionDetails extends React.Component {
 						{percentRecommend} % travellers recommend travelling to {country}
 					</div>
 					{surveyList.map((survey) => {
+						const travelledFrom = countryMap()[survey.source]["name"].toUpperCase();
 						return (
 							<Comment
 								key={`comment-${survey.name}`}
@@ -657,12 +658,12 @@ export default class CovidRestricionDetails extends React.Component {
 			renderFn: this.renderAreaRestrictions,
 		},
 		{
-			name: "Traveller Comments",
-			renderFn: this.renderTravellerComments,
-		},
-		{
 			name: "Vaccination coverage",
 			renderFn: this.renderSummaryTab,
+		},
+		{
+			name: "Traveller Comments",
+			renderFn: this.renderTravellerComments,
 		},
 	];
 

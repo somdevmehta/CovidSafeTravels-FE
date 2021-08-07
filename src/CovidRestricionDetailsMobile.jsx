@@ -359,7 +359,6 @@ export default class CovidRestricionDetailsMobile extends React.Component {
 	renderTravellerComments = () => {
 		const { country, sourceCountry } = this.props;
 		const { surveyList, percentRecommend } = this.props.surveyData;
-		const travelledFrom = countryMap()[sourceCountry]["name"].toUpperCase();
 
 		if (surveyList && surveyList.length > 0) {
 			return (
@@ -369,6 +368,7 @@ export default class CovidRestricionDetailsMobile extends React.Component {
 						{percentRecommend} % travellers recommend travelling to {country}
 					</div>
 					{surveyList.map((survey) => {
+						const travelledFrom = countryMap()[survey.source]["name"].toUpperCase();
 						return (
 							<Comment
 								key={`comment-${survey.name}`}
@@ -657,12 +657,12 @@ export default class CovidRestricionDetailsMobile extends React.Component {
 			renderFn: this.renderAreaRestrictions,
 		},
 		{
-			name: "Traveller Comments",
-			renderFn: this.renderTravellerComments,
-		},
-		{
 			name: "Vaccination coverage",
 			renderFn: this.renderSummaryTab,
+		},
+		{
+			name: "Traveller Comments",
+			renderFn: this.renderTravellerComments,
 		},
 	];
 

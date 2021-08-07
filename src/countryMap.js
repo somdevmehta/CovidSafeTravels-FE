@@ -238,6 +238,10 @@ const countryMap = () => ({
 	TV: { alpha3: "TUV", name: "Tuvalu" },
 	UG: { alpha3: "UGA", name: "Uganda" },
 	UA: { alpha3: "UKR", name: "Ukraine" },
+	UK: {
+		alpha3: "GBR",
+		name: "United Kingdom of Great Britain and Northern Ireland",
+	},
 	AE: { alpha3: "ARE", name: "United Arab Emirates" },
 	GB: {
 		alpha3: "GBR",

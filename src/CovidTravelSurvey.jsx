@@ -102,14 +102,14 @@ export default class CovidTravelSurvey extends React.Component {
 				footer={null}
 			>
 				Survey completed. Thank you for contributing to this survey!
-                <br/>
-                <br/>
-				<div style={{ alignContent: "center", textAlign:"center" }}>
+				<br />
+				<br />
+				<div style={{ alignContent: "center", textAlign: "center" }}>
 					<Button
 						onClick={() =>
 							this.setState({ okayClicked: true, submitted: false })
 						}
-                        type="primary"
+						type="primary"
 					>
 						Ok
 					</Button>
@@ -122,47 +122,25 @@ export default class CovidTravelSurvey extends React.Component {
 		const { okayClicked } = this.state;
 
 		return (
-			<div
-				className="site-card-wrapper"
-				style={{
-					backgroundColor: "#f2f2f2",
-					color: "#333",
-					fontFamily: "Montserrat, sans-serif !important",
-					minHeight: "1080px",
-				}}
-			>
-				{this.renderModal()}
-				<Row gutter={16}>
-					<Col span={sideBarWidth}>&nbsp;</Col>
-					<Col
-						span={contentWidth}
-						style={{
-							borderLeft: "0.5px",
-							borderRight: "0.5px",
-							borderBottom: "1px",
-							borderTop: "0px",
-							borderColor: "blue",
-							borderStyle: "solid",
-							boxShadow: "0.2px 2px 3px grey",
-						}}
-					>
-						<PageHeader
-							className="site-page-header"
-							title={
-								<span style={{ color: "var(--primary-color)" }}>
-									<img
-										src="Priceline_Logo_RGB_Blue_2019-1.png"
-										alt="pcln-logo"
-										height="45em"
-									/>
-									&nbsp;&nbsp;CovidSafeTravel Survey
-								</span>
-							}
-						/>
-					</Col>
-					<Col span={sideBarWidth}>&nbsp;</Col>
-				</Row>
-				{!okayClicked ? (
+			<div style={{
+                backgroundColor: "#f2f2f2",}}>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+				<div
+					className="site-card-wrapper"
+					style={{
+						backgroundColor: "#f2f2f2",
+						color: "#333",
+						fontFamily: "Montserrat, sans-serif !important",
+						minHeight: "1080px",
+					}}
+				>
+					{this.renderModal()}
 					<Row gutter={16}>
 						<Col span={sideBarWidth}>&nbsp;</Col>
 						<Col
@@ -170,103 +148,135 @@ export default class CovidTravelSurvey extends React.Component {
 							style={{
 								borderLeft: "0.5px",
 								borderRight: "0.5px",
-								borderBottom: "0.5px",
-								borderTop: "0px",
+								borderBottom: "1px",
+								borderTop: "1px",
 								borderColor: "blue",
 								borderStyle: "solid",
-								boxShadow: "0.2px 1px 2px grey",
+								boxShadow: "0.2px 2px 3px grey",
 							}}
 						>
-							<br />
-							<br />
-							<Form
-								{...layout}
-								name="nest-messages"
-								onFinish={this.onFinish}
-								validateMessages={validateMessages}
+							<PageHeader
+								className="site-page-header"
+								title={
+									<span style={{ color: "var(--primary-color)" }}>
+										<img
+											src="Priceline_Logo_RGB_Blue_2019-1.png"
+											alt="pcln-logo"
+											height="45em"
+										/>
+										&nbsp;&nbsp;CovidSafeTravel Survey
+									</span>
+								}
+							/>
+						</Col>
+						<Col span={sideBarWidth}>&nbsp;</Col>
+					</Row>
+					{!okayClicked ? (
+						<Row gutter={16}>
+							<Col span={sideBarWidth}>&nbsp;</Col>
+							<Col
+								span={contentWidth}
+								style={{
+									borderLeft: "0.5px",
+									borderRight: "0.5px",
+									borderBottom: "0.5px",
+									borderTop: "0px",
+									borderColor: "blue",
+									borderStyle: "solid",
+									boxShadow: "0.2px 1px 2px grey",
+								}}
 							>
-								<Form.Item
-									name={["name"]}
-									label="Name"
-									rules={[{ required: false }]}
+								<br />
+								<br />
+								<Form
+									{...layout}
+									name="nest-messages"
+									onFinish={this.onFinish}
+									validateMessages={validateMessages}
 								>
-									<Input />
-								</Form.Item>
-								<Form.Item
-									name={["source"]}
-									label="Travelled To"
-									rules={[{ required: true }]}
-								>
-									{this.renderCountrySelection()}
-								</Form.Item>
-								<Form.Item
-									name={["destination"]}
-									label="Travelled To"
-									rules={[{ required: true }]}
-								>
-									{this.renderCountrySelection()}
-								</Form.Item>
-								<Form.Item
-									name={["date"]}
-									label="Travel on"
-									rules={[{ type: "date" }]}
-									rules={[{ required: true }]}
-								>
-									<DatePicker format={"yyyy-MM-DD"} />
-								</Form.Item>
-								<Form.Item
-									name="recommend"
-									label="Do you recommend others to travel?"
-									rules={[{ required: true }]}
-								>
-									<Radio.Group>
-										<Radio value={true}>Yes</Radio>
-										<Radio value={false}>No</Radio>
-									</Radio.Group>
-								</Form.Item>
-								<Form.Item
-									name={["covidReview"]}
-									label="Covid Travel Review"
-									rules={[{ required: true }]}
-								>
-									<Input.TextArea />
-								</Form.Item>
-								<Form.Item
-									wrapperCol={{ ...layout.wrapperCol, offset: 8 }}
-									rules={[{ required: true }]}
-								>
-									<Button type="primary" htmlType="submit">
-										Submit
-									</Button>
-								</Form.Item>
-							</Form>
-						</Col>
-						<Col span={sideBarWidth}>&nbsp;</Col>
-					</Row>
-				) : (
-					<Row gutter={16}>
-						<Col span={sideBarWidth}>&nbsp;</Col>
-						<Col
-							span={contentWidth}
-							style={{
-								borderLeft: "0.5px",
-								borderRight: "0.5px",
-								borderBottom: "0.5px",
-								borderTop: "0px",
-								borderColor: "blue",
-								borderStyle: "solid",
-								boxShadow: "0.2px 1px 2px grey",
-							}}
-						>
-							<br />
-							<br />
-							Thank you for contributing to this survey!
-							<br />
-							<br />
-						</Col>
-						<Col span={sideBarWidth}>&nbsp;</Col>
-					</Row>
-				)}
+									<Form.Item
+										name={["name"]}
+										label="Name"
+										rules={[{ required: false }]}
+									>
+										<Input />
+									</Form.Item>
+									<Form.Item
+										name={["source"]}
+										label="Travelled To"
+										rules={[{ required: true }]}
+									>
+										{this.renderCountrySelection()}
+									</Form.Item>
+									<Form.Item
+										name={["destination"]}
+										label="Travelled To"
+										rules={[{ required: true }]}
+									>
+										{this.renderCountrySelection()}
+									</Form.Item>
+									<Form.Item
+										name={["date"]}
+										label="Travel on"
+										rules={[{ type: "date" }]}
+										rules={[{ required: true }]}
+									>
+										<DatePicker format={"yyyy-MM-DD"} />
+									</Form.Item>
+									<Form.Item
+										name="recommend"
+										label="Do you recommend others to travel?"
+										rules={[{ required: true }]}
+									>
+										<Radio.Group>
+											<Radio value={true}>Yes</Radio>
+											<Radio value={false}>No</Radio>
+										</Radio.Group>
+									</Form.Item>
+									<Form.Item
+										name={["covidReview"]}
+										label="Covid Travel Review"
+										rules={[{ required: true }]}
+									>
+										<Input.TextArea rows="7" />
+									</Form.Item>
+									<Form.Item
+										wrapperCol={{ ...layout.wrapperCol, offset: 8 }}
+										rules={[{ required: true }]}
+									>
+										<Button type="primary" htmlType="submit">
+											Submit
+										</Button>
+									</Form.Item>
+								</Form>
+							</Col>
+							<Col span={sideBarWidth}>&nbsp;</Col>
+						</Row>
+					) : (
+						<Row gutter={16}>
+							<Col span={sideBarWidth}>&nbsp;</Col>
+							<Col
+								span={contentWidth}
+								style={{
+									borderLeft: "0.5px",
+									borderRight: "0.5px",
+									borderBottom: "0.5px",
+									borderTop: "0px",
+									borderColor: "blue",
+									borderStyle: "solid",
+									boxShadow: "0.2px 1px 2px grey",
+								}}
+							>
+								<br />
+								<br />
+								Thank you for contributing to this survey!
+								<br />
+								<br />
+							</Col>
+							<Col span={sideBarWidth}>&nbsp;</Col>
+						</Row>
+					)}
+				</div>
 			</div>
 		);
 	}
