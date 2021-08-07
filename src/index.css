@@ -201,3 +201,8 @@ button#cst-modal-close:hover {
   bottom: 0;
   right: 0;
 }
+
+.ant-comment-avatar span svg {
+  width: 35px;
+  height: 35px;
+}

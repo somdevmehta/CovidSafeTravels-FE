@@ -417,7 +417,7 @@ export default class CovidRestricionDetails extends React.Component {
 								display: "inline",
 							}}
 						>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</span>{" "}
 						- Entry banned from these countries
 						<div
