@@ -11,13 +11,15 @@ import {
 	Badge,
 	Comment,
 	Tag,
+	Statistic,
+	Space,
 } from "antd";
 import Datamap from "react-datamaps";
 import {
 	CaretRightOutlined,
 	UserOutlined,
 	CheckCircleTwoTone,
-	CloseCircleTwoTone
+	CloseCircleTwoTone,
 } from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
 const { Panel } = Collapse;
@@ -375,6 +377,39 @@ export default class CovidRestricionDetails extends React.Component {
 		}
 		return <p>Survey data not available for this destination</p>;
 	};
+	renderSummaryTab = () => {
+		const { areaVaccinated, summary } = this.props.covidRestrictionData.data;
+		const { country } = this.props;
+		const { surveyList, percentRecommend } = this.props.surveyData;
+
+		return (
+			<React.Fragment>
+				<span className="modal-heading">Vaccination coverage in {country}</span>
+				<Divider style={{ marginTop: 0 }} />
+				<Row gutter={16}>
+					<Col span={6}>
+						<Statistic
+							title="Fully Vaccinated"
+							value={`${areaVaccinated[1].percentage} %`}
+						/>
+					</Col>
+					<Col span={6}>
+						<Statistic
+							title="Partially Vaccinated"
+							value={`${areaVaccinated[0].percentage} %`}
+						/>
+					</Col>
+					<Col span={12}>&nbsp;</Col>
+				</Row>
+				<br />
+				<br />
+				<br />
+				<span className="modal-heading">Summary</span>
+				<Divider style={{ marginTop: 0 }} />
+				<p dangerouslySetInnerHTML={{ __html: summary }}></p>
+			</React.Fragment>
+		);
+	};
 
 	changeTabPosition = (e) => {
 		this.setState({ tabPosition: e.target.value });
@@ -588,6 +623,10 @@ export default class CovidRestricionDetails extends React.Component {
 			name: "Traveller Comments",
 			renderFn: this.renderTravellerComments,
 		},
+		{
+			name: "Summary",
+			renderFn: this.renderSummaryTab,
+		},
 	];
 
 	render() {
@@ -609,7 +648,7 @@ export default class CovidRestricionDetails extends React.Component {
 								fontSize: "12px",
 							}}
 						>
-							{index !== 5 ? (
+							{index !== 5 && index !== 7 ? (
 								<React.Fragment>
 									<span className="modal-heading">{tab.name}</span>
 									<Divider style={{ marginTop: 0 }} />
