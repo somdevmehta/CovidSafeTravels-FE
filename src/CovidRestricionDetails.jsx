@@ -22,6 +22,8 @@ import {
 	StopTwoTone,
 } from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
+import moment from 'moment';
+
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 const text = `
@@ -111,6 +113,7 @@ export default class CovidRestricionDetails extends React.Component {
 		];
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(entry.date).format('L')} </div>
 				{this.renderCardList(data)}
 				<br />
 				<span className="modal-heading">More Info</span>
@@ -175,6 +178,7 @@ export default class CovidRestricionDetails extends React.Component {
 		];
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(diseaseTesting.date).format('L')} </div>
 				{this.renderCardList(data)}
 				<br />
 				<span className="modal-heading">More Info</span>
@@ -230,6 +234,7 @@ export default class CovidRestricionDetails extends React.Component {
 		];
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(declarationDocuments.date).format('L')} </div>
 				{this.renderCardList(data)}
 				<br />
 				<span className="modal-heading">More Info</span>
@@ -275,6 +280,7 @@ export default class CovidRestricionDetails extends React.Component {
 		];
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(tracingApplication.date).format('L')} </div>
 				{this.renderCardList(data)}
 				<br />
 				<span className="modal-heading">More Info</span>
@@ -357,7 +363,7 @@ export default class CovidRestricionDetails extends React.Component {
 
 		if (surveyList && surveyList.length > 0) {
 			return (
-				<React.Fragment>
+				<div style={{paddingRight : "24px"}}>
 					<div style={{ textAlign: "right" }}>
 						<CheckCircleTwoTone /> &nbsp;&nbsp;
 						{percentRecommend} % travellers recommend travelling to {country}
@@ -390,7 +396,7 @@ export default class CovidRestricionDetails extends React.Component {
 							/>
 						);
 					})}
-				</React.Fragment>
+				</div>
 			);
 		}
 		return <p>Survey data not available for this destination</p>;
@@ -403,6 +409,7 @@ export default class CovidRestricionDetails extends React.Component {
 
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(areaVaccinated[0].date).format('L')} </div>
 				<span className="modal-heading">Vaccination coverage in {country}</span>
 				<Divider style={{ marginTop: 0 }} />
 				<Row gutter={16}>
@@ -445,7 +452,7 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderMap = () => {
-		const { bannedArea } =
+		const { bannedArea, date } =
 			this.props.covidRestrictionData.data.areaAccessRestriction.entry;
 		let mapColorData = {};
 		let countryLegends = [];
@@ -460,6 +467,7 @@ export default class CovidRestricionDetails extends React.Component {
 		console.log(mapColorData);
 		return (
 			<React.Fragment>
+				<div className="last-updated">Last updated : {moment(date).format('L')} </div>
 				<Row gutter={16}>
 					<Col span={18}>
 						<Datamap

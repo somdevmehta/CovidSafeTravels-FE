@@ -197,13 +197,24 @@ button#cst-modal-close:hover {
   font-size: 14px
 }
 
+.ant-tabs-tabpane {
+  position: relative;
+}
+
 .last-updated {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 6px;
+  right: 0px;
+  font-size: 10px;
+  color: rgb(204, 204, 204);
 }
 
 .ant-comment-avatar span svg {
   width: 35px;
   height: 35px;
+}
+
+.ant-tag-volcano {
+  font-size: 9px !important;
+  vertical-align:  bottom;
 }
