@@ -171,11 +171,12 @@ button#cst-modal-close:hover {
 }
 
 .left-column {
-  flex: 0.9
+  flex: 0.7
 }
 
 .right-column {
-  flex: 0.1
+  flex: 0.3;
+  text-align: right;
 }
 
 .ongoing-restrictions strong {

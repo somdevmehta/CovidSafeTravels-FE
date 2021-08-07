@@ -86,7 +86,16 @@ class Banner extends React.Component {
 		return (
 			<div className="popover-body">
 				<ul>
-					{entryBan && <li>Restrictions : {entryBan} Ban implemented</li>}
+					{entryBan && (
+						<li>
+							<div className="flexBox">
+								<div style={{flex: "0.4"}}>
+                                Restrictions:
+								</div>
+								<div style={{flex: "0.6", textAlign: "right"}}>{entryBan} Ban implemented</div>
+							</div>
+						</li>
+					)}
 					{document && (
 						<li>
 							<div className="flexBox">
