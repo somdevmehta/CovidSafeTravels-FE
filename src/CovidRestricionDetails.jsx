@@ -95,7 +95,7 @@ export default class CovidRestricionDetails extends React.Component {
 				content: (
 					<span>
 						<Badge status="processing" />
-						{entry.throughDate}
+						{entry.throughDate === "indef" ? "Indefinitely" :entry.throughDate}
 					</span>
 				),
 			},
@@ -480,7 +480,7 @@ export default class CovidRestricionDetails extends React.Component {
 						<div
 							style={{
 								overflowX: "scroll",
-								maxHeight: "550px",
+								maxHeight: "520px",
 								marginTop: "15px",
 							}}
 						>
