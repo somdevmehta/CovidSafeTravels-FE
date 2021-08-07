@@ -81,7 +81,7 @@ class Banner extends React.Component {
 		data = this.state.covidRestrictionData.data.areaAccessRestriction
 	) => {
 		const entryBan = data.entry.ban.toUpperCase();
-		const mask = data.mask.isRequired.toUpperCase();
+		const mask = data.mask.isRequired.toUpperCase() == "NO" ? "NO" : "YES";
 		const document = data.declarationDocuments.documentRequired.toUpperCase();
 
 		return (
