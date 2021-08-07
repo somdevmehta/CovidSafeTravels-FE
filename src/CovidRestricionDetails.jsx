@@ -340,10 +340,12 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderTravellerComments = () => {
-		const { surveyList } = this.props.surveyData;
+		const { country } = this.props;
+		const { surveyList, percentRecommend } = this.props.surveyData;
 		if (surveyList && surveyList.length > 0) {
 			return (
 				<React.Fragment>
+					<div style={{textAlign: "right"}}> {percentRecommend} % travellers recommend travelling to {country}</div>
 					{surveyList.map((survey) => {
 						return (
 							<Comment

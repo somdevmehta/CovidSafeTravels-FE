@@ -71,6 +71,7 @@ class Banner extends React.Component {
 				<CovidRestricionDetails
 					covidRestrictionData={covidRestrictionData}
 					surveyData={surveyData}
+                    country={country}
 				/>
 			</Modal>
 		);
