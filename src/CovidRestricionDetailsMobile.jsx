@@ -679,7 +679,6 @@ export default class CovidRestricionDetailsMobile extends React.Component {
 						header={this.renderTabName(tab.name, index)}
 							key={tab.name}
 							style={{
-								textAlign: "justify",
 								fontSize: "12px",
 							}}
 						>
