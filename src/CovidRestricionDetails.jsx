@@ -19,7 +19,7 @@ import {
 	CaretRightOutlined,
 	UserOutlined,
 	CheckCircleTwoTone,
-	CloseCircleTwoTone,
+	StopTwoTone,
 } from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
 import moment from 'moment';
@@ -97,7 +97,7 @@ export default class CovidRestricionDetails extends React.Component {
 				content: (
 					<span>
 						<Badge status="processing" />
-						{entry.throughDate}
+						{entry.throughDate === "indef" ? "Indefinitely" :entry.throughDate}
 					</span>
 				),
 			},
@@ -345,8 +345,10 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderTravellerComments = () => {
-		const { country } = this.props;
+		const { country, sourceCountry } = this.props;
 		const { surveyList, percentRecommend } = this.props.surveyData;
+		const travelledFrom = countryMap()[sourceCountry]["name"].toUpperCase();
+
 		if (surveyList && surveyList.length > 0) {
 			return (
 				<div style={{paddingRight : "24px"}}>
@@ -360,19 +362,25 @@ export default class CovidRestricionDetails extends React.Component {
 								key={`comment-${survey.name}`}
 								author={survey.name}
 								avatar={<UserOutlined />}
-								content={<p>{survey.covidReview}</p>}
-								datetime={
-									<span>
-										{survey.date} &nbsp;{" "}
+								content={<React.Fragment>
+									<p style={{ fontSize: "10px"}}> 
 										{survey.recommend ? (
 											<span>
 												<CheckCircleTwoTone /> &nbsp; Recommends
 											</span>
 										) : (
 											<span>
-												<CloseCircleTwoTone /> &nbsp; Does not Recommends
+												<StopTwoTone /> &nbsp; Does not Recommend
 											</span>
 										)}
+										&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+										{`Travelled from ${travelledFrom}`}
+									</p>
+									<p>{survey.covidReview}</p>
+								</React.Fragment>}
+								datetime={
+									<span>
+										{survey.date}
 									</span>
 								}
 							/>
@@ -480,7 +488,7 @@ export default class CovidRestricionDetails extends React.Component {
 						<div
 							style={{
 								overflowX: "scroll",
-								maxHeight: "550px",
+								maxHeight: "520px",
 								marginTop: "15px",
 							}}
 						>
