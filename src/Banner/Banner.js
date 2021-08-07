@@ -58,6 +58,7 @@ class Banner extends React.Component {
 	};
 
 	renderModal = (destination, covidRestrictionData, surveyData) => {
+		const { source } = this.props;
 		const country = covidRestrictionData.data.area.name.toUpperCase();
 		return (
 			<Modal
@@ -72,6 +73,7 @@ class Banner extends React.Component {
 					covidRestrictionData={covidRestrictionData}
 					surveyData={surveyData}
                     country={country}
+                    sourceCountry={getAlpha2CountryCode(source)}
 				/>
 			</Modal>
 		);
