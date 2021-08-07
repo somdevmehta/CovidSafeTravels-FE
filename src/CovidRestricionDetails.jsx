@@ -686,7 +686,7 @@ export default class CovidRestricionDetails extends React.Component {
 								fontSize: "12px",
 							}}
 						>
-							{index !== 5 && index !== 7 ? (
+							{index !== 5 && index !== 6 ? (
 								<React.Fragment>
 									<span className="modal-heading">{tab.name}</span>
 									<Divider style={{ marginTop: 0 }} />
