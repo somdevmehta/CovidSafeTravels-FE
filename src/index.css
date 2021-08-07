@@ -237,4 +237,9 @@ button#cst-modal-close:hover {
     overflow: scroll;
     height: 600px;
   }
+
+  .ant-modal {
+    width: 95%;
+    top: 0;
+  }
 }
