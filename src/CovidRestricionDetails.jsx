@@ -13,7 +13,12 @@ import {
 	Tag,
 } from "antd";
 import Datamap from "react-datamaps";
-import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
+import {
+	CaretRightOutlined,
+	UserOutlined,
+	CheckCircleTwoTone,
+	CloseCircleTwoTone
+} from "@ant-design/icons";
 import { mapAlpha2ToAlpha3, countryMap } from "./countryMap";
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -71,7 +76,7 @@ export default class CovidRestricionDetails extends React.Component {
 	};
 
 	renderEntryRestrictions = () => {
-		const { entry , mask } =
+		const { entry, mask } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
@@ -100,15 +105,13 @@ export default class CovidRestricionDetails extends React.Component {
 						{mask.isRequired}
 					</span>
 				),
-			}
+			},
 		];
 		return (
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<span className="modal-heading">
-					More Info
-				</span>
+				<span className="modal-heading">More Info</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: entry.text }}></p>
 				<br />
@@ -151,28 +154,28 @@ export default class CovidRestricionDetails extends React.Component {
 			},
 			{
 				title: "When?",
-				content:
+				content: (
 					<span>
 						<Badge status="processing" />
 						{diseaseTesting.when}
 					</span>
+				),
 			},
 			{
 				title: "Test Types",
-				content:
+				content: (
 					<span>
 						<Badge status="processing" />
 						{diseaseTesting.testType}
 					</span>
+				),
 			},
 		];
 		return (
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<span className="modal-heading">
-					More Info
-				</span>
+				<span className="modal-heading">More Info</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: diseaseTesting.text }}></p>
 				<br />
@@ -190,7 +193,7 @@ export default class CovidRestricionDetails extends React.Component {
 		const { declarationDocuments } =
 			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const { diseaseVaccination } =
-				this.props.covidRestrictionData.data.areaAccessRestriction;
+			this.props.covidRestrictionData.data.areaAccessRestriction;
 		const data = [
 			{
 				title: "Self Declaration Required?",
@@ -204,9 +207,9 @@ export default class CovidRestricionDetails extends React.Component {
 			{
 				title: "Vaccination Required?",
 				content: (
-						<span>
+					<span>
 						<Badge status="processing" />
-							{diseaseVaccination.isRequired}
+						{diseaseVaccination.isRequired}
 					</span>
 				),
 			},
@@ -215,9 +218,7 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<span className="modal-heading">
-					More Info
-				</span>
+				<span className="modal-heading">More Info</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: declarationDocuments.text }}></p>
 				<br />
@@ -262,9 +263,7 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<span className="modal-heading">
-					More Info
-				</span>
+				<span className="modal-heading">More Info</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: tracingApplication.text }}></p>
 				<br />
@@ -304,9 +303,7 @@ export default class CovidRestricionDetails extends React.Component {
 			<React.Fragment>
 				{this.renderCardList(data)}
 				<br />
-				<span className="modal-heading">
-					More Info
-				</span>
+				<span className="modal-heading">More Info</span>
 				<Divider style={{ marginTop: 0 }} />
 				<p dangerouslySetInnerHTML={{ __html: mask.text }}></p>
 				<br />
@@ -345,7 +342,10 @@ export default class CovidRestricionDetails extends React.Component {
 		if (surveyList && surveyList.length > 0) {
 			return (
 				<React.Fragment>
-					<div style={{textAlign: "right"}}> {percentRecommend} % travellers recommend travelling to {country}</div>
+					<div style={{ textAlign: "right" }}>
+						<CheckCircleTwoTone /> &nbsp;&nbsp;
+						{percentRecommend} % travellers recommend travelling to {country}
+					</div>
 					{surveyList.map((survey) => {
 						return (
 							<Comment
@@ -353,7 +353,20 @@ export default class CovidRestricionDetails extends React.Component {
 								author={survey.name}
 								avatar={<UserOutlined />}
 								content={<p>{survey.covidReview}</p>}
-								datetime={<span>{survey.date}</span>}
+								datetime={
+									<span>
+										{survey.date} &nbsp;{" "}
+										{survey.recommend ? (
+											<span>
+												<CheckCircleTwoTone /> &nbsp; Recommends
+											</span>
+										) : (
+											<span>
+												<CloseCircleTwoTone /> &nbsp; Does not Recommends
+											</span>
+										)}
+									</span>
+								}
 							/>
 						);
 					})}
@@ -426,7 +439,7 @@ export default class CovidRestricionDetails extends React.Component {
 							style={{
 								overflowX: "scroll",
 								maxHeight: "550px",
-								marginTop: "15px"
+								marginTop: "15px",
 							}}
 						>
 							<List
@@ -532,15 +545,22 @@ export default class CovidRestricionDetails extends React.Component {
 
 	renderTabName = (tabName, index) => {
 		if (index === 0) {
-			const { ban } = this.props.covidRestrictionData.data.areaAccessRestriction.entry
-			return (<React.Fragment>
-				{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
-			</React.Fragment>);
+			const { ban } =
+				this.props.covidRestrictionData.data.areaAccessRestriction.entry;
+			return (
+				<React.Fragment>
+					{tabName} <Tag color="volcano">{ban.toUpperCase()}</Tag>
+				</React.Fragment>
+			);
 		} else if (index === 1) {
-			const { requirement } = this.props.covidRestrictionData.data.areaAccessRestriction.diseaseTesting;
-			return (<React.Fragment>
-				{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
-			</React.Fragment>);
+			const { requirement } =
+				this.props.covidRestrictionData.data.areaAccessRestriction
+					.diseaseTesting;
+			return (
+				<React.Fragment>
+					{tabName} <Tag color="volcano">{requirement.toUpperCase()}</Tag>
+				</React.Fragment>
+			);
 		}
 		return tabName;
 	};
@@ -586,14 +606,12 @@ export default class CovidRestricionDetails extends React.Component {
 								height: "600px",
 								overflow: scroll,
 								textAlign: "justify",
-								fontSize: "12px" 
+								fontSize: "12px",
 							}}
 						>
 							{index !== 5 ? (
 								<React.Fragment>
-									<span className="modal-heading">
-										{tab.name}
-									</span>
+									<span className="modal-heading">{tab.name}</span>
 									<Divider style={{ marginTop: 0 }} />
 								</React.Fragment>
 							) : null}
