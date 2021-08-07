@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Banner />
+    <CovidTravelSurvey />
   </React.StrictMode>,
   document.getElementById('root')
 );
